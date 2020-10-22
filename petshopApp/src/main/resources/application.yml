@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: petshop-app
+  datasource:
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5532/petshop-database
+    initialization-mode: always
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        generate_statistics: true
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+
+server:
+  port: 8080

@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  database:
+    container_name: petshop-database
+    image: postgres:12.4-alpine
+    ports:
+      #     Porta da maquina : porta do container
+      - "5532:5432"
+    environment:
+      POSTGRES_DB: petshop-database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
