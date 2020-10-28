@@ -1,45 +1,46 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
 import React from 'react'
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { PERSON_PETS } from '../graphql/queries';
 import { PersonPetsResult} from '../types/Pet';
 import { PetView } from './PetView';
+import { DELETE_PERSON } from '../graphql/mutations';
+import { useHistory } from 'react-router-dom';
+import { Person } from '../types/Person';
 
 export interface PersonViewProps {
-    id: number,
-    name: string,
-    birthDate: string
+    person: Person;
 }
 
 export function PersonView(props: PersonViewProps) {
+
     const  {data} = useQuery<PersonPetsResult>(PERSON_PETS, 
-        {variables: {id: props.id}
+        {variables: {id: props.person.id}
     });
 
-    console.log(`Data from person#${props.id}: ${data}\n Data.pets: ${data?.personPets}`)
+    const [deletePerson] = useMutation(DELETE_PERSON);
 
-    let timeout: NodeJS.Timeout;
+    const history = useHistory();
 
-    const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) => {
-        const value = evt.currentTarget.value;
-        clearTimeout(timeout);
-        timeout = setTimeout( () => console.log(value), 500)
+    const routeUpdate = () => {
+        history.push(`/updatePerson/${props.person.id}`)
+    }
+
+    const routeNewPet = () => {
+        history.push(`/createPet/${props.person.id}`)
     }
 
     return(
-        <div css={css`
-            background-color: grey;
-        `}>
-            <h3> Person #{props.id}</h3>
-            <div> Name: {props.name} </div>
-            <div> Birth Date: {props.birthDate} </div>
-            Busca: <input type="text" name="busca" id="" onChange={handleSearch}/>
-            <button onClick={() => console.log(`Alterar da pessoa c/ ID: ${props.id}`)}>Alterar</button>
-            <button onClick={() => console.log(`Deletar a pessoa c/ ID: ${props.id}`)}>Deletar</button>
+        <div>
+            <h3> Person #{props.person.id}</h3>
+            <div> Name: {props.person.name} </div>
+            <div> Birth Date: {props.person.birthDate} </div>
+
+            <button onClick={routeUpdate}>Alterar</button>
+            <button onClick={() => deletePerson( { variables: {id: props.person.id} } ) }>Deletar</button>
+            <button onClick={routeNewPet}>Adicionar um pet</button>    
                 {data?.personPets && data.personPets.map( (pet) => (
                     <div key={pet.id}>
-                        <PetView id={pet.id} name={pet.name} birthDate={pet.birthDate}/>
+                        <PetView pet={pet} owner={props.person}/>
                     </div>
                 ))}
         </div>
