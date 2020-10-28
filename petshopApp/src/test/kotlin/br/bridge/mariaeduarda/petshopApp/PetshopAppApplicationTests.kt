@@ -13,48 +13,75 @@ class PetshopAppApplicationTests(
         @Autowired var personService: PersonService,
         @Autowired var petService: PetService
 ) {
-    @Test
-    fun findAllPersons() {
-        personService.getAllPersons().iterator().forEach {
-            println(it.toString())
-            val pets: List<Pet>? = personService.getPets(id = it.id!!)
-            println(pets.toString())
-        }
-    }
 
     @Test
     fun findPersonById() {
-        assert(personService.getPersonById(1)?.name == "Maria")
-        assert(personService.getPersonById(2)?.name == "Marcos")
+        val l: List<Person>? = personService.findAll()
+        l?.iterator()?.forEach {
+            println(it.toString())
+        }
+        assert(personService.findById(1)?.name == "Maria")
+        assert(personService.findById(2)?.name == "Marcos")
+    }
+
+    @Test
+    fun findPersonByBirthDate() {
+        val l: List<Person>? = personService.findByBirthDate(date = "22/01/1999")
+        assert(l?.count() == 1)
+        l?.iterator()?.forEach {
+            assert(it.name == "Maria")
+        }
     }
 
     @Test
     fun findPersonByName() {
-        val l: List<Person> = personService.getByName("Marcos")
-        l.iterator().forEach {
-            println(it.toString())
-            assert(it.id == 2L)
+        val l: List<Person>? = personService.findByName("Maria Eduarda")
+        l?.iterator()?.forEach {
+            assert(it.id == 3L)
         }
     }
 
     @Test
-    fun findAllPets() {
-        petService.getAllPets().iterator().forEach { println(it.toString()) }
+    fun findPersonsByNameLike() {
+        val l: List<Person>? = personService.findByNameLike("%Maria%")
+        assert(l?.count() == 2)
+        assert(l?.get(0)?.id == 1L)
+        assert(l?.get(1)?.id == 3L)
     }
 
     @Test
     fun findPetById() {
-        assert(petService.getPetById(1)?.name == "Bebel")
-        assert(petService.getPetById(2)?.name == "Foguete")
+        assert(petService.findById(1)?.name == "Bebel")
+        assert(petService.findById(2)?.name == "Foguete")
     }
 
     @Test
     fun findPetByName() {
-        val l: List<Pet> = petService.getByName("Bebel")
-        l.iterator().forEach {
-            println(it.toString())
+        val l: List<Pet>? = petService.findByName("Bebel")
+        l?.iterator()?.forEach {
             assert(it.id == 1L)
         }
+    }
+
+    @Test
+    fun findPetByBirthDate() {
+        val l: List<Pet>? = petService.findByBirthDate(date = "22/01/2010")
+        assert(l?.count() == 1)
+        l?.iterator()?.forEach {
+            assert(it.name == "Bebel")
+        }
+    }
+
+    @Test
+    fun findByOwnerId() {
+        val l: List<Pet>? = petService.findByOwnerId(id = 1L)
+        assert(l?.count() == 3)
+    }
+
+    @Test
+    fun findByOwnerName() {
+        val l: List<Pet>? = petService.findByOwnerName("Maria")
+        assert(l?.count() == 3)
     }
 
 }

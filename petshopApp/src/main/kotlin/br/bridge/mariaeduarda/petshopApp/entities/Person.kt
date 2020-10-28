@@ -18,7 +18,7 @@ data class Person(
 
         @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL])
         @JsonIgnore
-        val pets: List<Pet>? = null
+        var pets: List<Pet>? = null
 ) {
     override fun toString(): String {
         return "[PERSON #${id}] Name: ${name}, BirthDate: $birthDate"

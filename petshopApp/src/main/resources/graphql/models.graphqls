@@ -1,0 +1,35 @@
+type Query {
+    persons: [Person]
+    person(id: Int!): Person
+    personsByName(name: String!): [Person]
+    personPets(id: Int!): [Pet]
+
+    pets: [Pet]
+    pet(id: Int!): Pet
+    petsByName(name: String!): [Pet]
+}
+
+type Mutation {
+    newPerson(name: String!, birthDate: String!): Person!
+    updatePerson(id: Int!, newName: String!): Person!
+    deletePerson(id: Int!): Boolean
+
+    newPet(name: String!, birthDate: String!, ownerId: Int!): Pet!
+    updatePet(id: Int!, newName: String!): Pet!
+    deletePet(id: Int!) : Boolean
+
+}
+
+type Person {
+    id: Int!
+    name: String!
+    birthDate: String!
+    pets: [Pet]
+}
+
+type Pet {
+    id: Int!
+    name: String!
+    birthDate: String!
+    owner: Person!
+}

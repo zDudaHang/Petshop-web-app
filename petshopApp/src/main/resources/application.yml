@@ -21,3 +21,16 @@ spring:
 
 server:
   port: 8080
+
+graphiql:
+  servlet:
+    mapping: /graphql
+    enabled: true
+    corsEnabled: true
+    endpoint:
+      graphql: /graphql
+    pageTitle: GraphiQL
+    props:
+      variables:
+        editorTheme: "solarized light"
+

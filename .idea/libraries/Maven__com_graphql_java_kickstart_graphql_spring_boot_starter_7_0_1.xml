@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.graphql-java-kickstart:graphql-spring-boot-starter:7.0.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/graphql-java-kickstart/graphql-spring-boot-starter/7.0.1/graphql-spring-boot-starter-7.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/graphql-java-kickstart/graphql-spring-boot-starter/7.0.1/graphql-spring-boot-starter-7.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/graphql-java-kickstart/graphql-spring-boot-starter/7.0.1/graphql-spring-boot-starter-7.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
