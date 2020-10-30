@@ -6,7 +6,6 @@ import br.bridge.mariaeduarda.petshopApp.repositories.PetRepository
 import br.bridge.mariaeduarda.petshopApp.util.DateFormatter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.time.LocalDate
 import java.util.*
 
 @Service
@@ -45,20 +44,11 @@ class PetService(@Autowired val repo: PetRepository, @Autowired val personServic
         return p.get()
     }
 
-    fun findByName(name: String): List<Pet>? {
-        return repo.findByName(name)
-    }
-
-    fun findByBirthDate(date: String): List<Pet>? {
-        val newDate: LocalDate = DateFormatter.formatDate(date)
-        return repo.findByBirthDate(newDate)
+    fun findByNameLike(name: String): List<Pet>? {
+        return repo.findByNameLike("%$name%")
     }
 
     fun findByOwnerId(id: Long): List<Pet>? {
         return repo.findByOwnerId(id)
-    }
-
-    fun findByOwnerName(name: String): List<Pet>? {
-        return repo.findByOwnerNameLike(name)
     }
 }

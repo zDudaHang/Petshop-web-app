@@ -1,21 +1,16 @@
 import React from 'react'
-import { useQuery, useMutation } from '@apollo/client';
-import { PERSON_PETS } from '../graphql/queries';
-import { PersonPetsResult} from '../types/Pet';
-import { PetView } from './PetView';
+import { useMutation } from '@apollo/client';
 import { DELETE_PERSON } from '../graphql/mutations';
 import { useHistory } from 'react-router-dom';
 import { Person } from '../types/Person';
+import { formatDate } from '../util';
+import "../styles/PersonView.css"
 
 export interface PersonViewProps {
     person: Person;
 }
 
 export function PersonView(props: PersonViewProps) {
-
-    const  {data} = useQuery<PersonPetsResult>(PERSON_PETS, 
-        {variables: {id: props.person.id}
-    });
 
     const [deletePerson] = useMutation(DELETE_PERSON);
 
@@ -29,20 +24,18 @@ export function PersonView(props: PersonViewProps) {
         history.push(`/createPet/${props.person.id}`)
     }
 
-    return(
-        <div>
-            <h3> Person #{props.person.id}</h3>
-            <div> Name: {props.person.name} </div>
-            <div> Birth Date: {props.person.birthDate} </div>
+    const routePets = () => {
+        history.push(`/pets/${props.person.id}`)
+    }
 
-            <button onClick={routeUpdate}>Alterar</button>
-            <button onClick={() => deletePerson( { variables: {id: props.person.id} } ) }>Deletar</button>
+    return(
+        <div className="personView">
+            <div className="name"> {props.person.name} </div>
+            <div className="info"> Data de Nascimento: {formatDate(props.person.birthDate)} </div>
+            <button className="alterar" onClick={routeUpdate}>Alterar</button>
+            <button className="deletar"onClick={() => deletePerson( { variables: {id: props.person.id} } ) }>Deletar</button>
+            <button onClick={routePets}>Ver pets</button>
             <button onClick={routeNewPet}>Adicionar um pet</button>    
-                {data?.personPets && data.personPets.map( (pet) => (
-                    <div key={pet.id}>
-                        <PetView pet={pet} owner={props.person}/>
-                    </div>
-                ))}
         </div>
     )
 

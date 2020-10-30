@@ -55,3 +55,27 @@ export const PET = gql`
   }
 `;
 
+
+export const PETS_BY_NAME_LIKE = gql`
+  query PetsByNameLike($name: String!) {
+    petsByNameLike(name: $name) {
+      id
+      name
+      birthDate
+    }
+  }
+`;
+
+export const PERSONS_BY_NAME_LIKE = gql`
+  query PersonsByNameLike($name: String!) {
+    personsByNameLike(name: $name) {
+      id
+      name
+      birthDate
+    }
+  }
+`;
+
+
+
+

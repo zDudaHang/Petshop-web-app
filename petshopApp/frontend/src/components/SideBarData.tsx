@@ -1,24 +1,24 @@
 import React from "react";
-import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
-import { MdPersonAdd, MdPets } from "react-icons/md";
+import { AiOutlineSearch, AiOutlineQuestionCircle } from "react-icons/ai";
+import { MdPersonAdd } from "react-icons/md";
 
 export const SidebarData = [
     {
-        title:"Home",
+        title:"Buscar",
         path:"/",
-        icon:<AiOutlineHome/>,
+        icon:<AiOutlineSearch/>,
         className: "nav-text"
     },
 
     {
-        title:"Create a person",
+        title:"Adicionar uma nova pessoa",
         path:"/createPerson",
         icon: <MdPersonAdd/>,
         className: "nav-text"
     }, 
 
     {
-        title:"About",
+        title:"Sobre",
         path:"/about",
         icon:<AiOutlineQuestionCircle/>,
         className: "nav-text"

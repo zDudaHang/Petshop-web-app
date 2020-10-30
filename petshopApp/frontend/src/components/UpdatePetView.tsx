@@ -5,6 +5,8 @@ import { UPDATE_PET } from "../graphql/mutations";
 import { useParams } from "react-router-dom";
 import { PET } from "../graphql/queries";
 import { useState } from "react";
+import "../styles/Form.css";
+import { formatDate } from "../util";
 
 export function UpdatePetView() {
 
@@ -34,15 +36,16 @@ export function UpdatePetView() {
     if (data?.pet) {
         return (
             <>
-                <form onSubmit={(e) => handleSubmit(e, petId, newName)}>
+                <h1> Atualizando dados do(a) {data.pet.name}</h1>
+                <form className="form" onSubmit={(e) => handleSubmit(e, petId, newName)}>
                     <label>
                         Nome:
-                        <input type="text" name="newName" value={newName} onChange={e => setNewName(e.target.value)}/>
                     </label>
+                    <input type="text" value={newName} onChange={e => setNewName(e.target.value)}/>
                     <label>
                         Data de Nascimento:
-                        <input type="text" name="birthDate" value={data?.pet.birthDate} disabled={true}/>
                     </label>
+                    <input type="text" value={formatDate(data.pet.birthDate)} disabled={true}/>
                     <input type="submit" value="Enviar"/>
                 </form>
 
@@ -50,9 +53,7 @@ export function UpdatePetView() {
         );
     } else { 
         return (
-            <>
-            <h3>Loading...</h3>
-            </>
+            <h1> Carregando... </h1>
         );
     }
 }

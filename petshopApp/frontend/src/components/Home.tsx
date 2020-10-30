@@ -10,6 +10,7 @@ import { UpdatePetView } from "./UpdatePetView";
 import { UpdatePersonView } from "./UpdatePersonView";
 
 import { Navbar } from "./Navbar";
+import { ListPetsView } from "./ListPetsView";
 
 export function Home(props: any) {
 
@@ -19,11 +20,12 @@ export function Home(props: any) {
         <Navbar/>
         <Switch>
           <Route exact path="/" component={SearchView}></Route>
-          <Route exact path="/about" component={AboutView}></Route>
-          <Route exact path="/createPet/:ownerId/" component={CreatePetView}></Route>
-          <Route exact path="/createPerson" component={CreatePersonView}></Route>
-          <Route exact path="/updatePet/:petId" component={UpdatePetView}></Route>
-          <Route exact path="/updatePerson/:personId" component={UpdatePersonView}></Route>
+          <Route path="/about" component={AboutView}></Route>
+          <Route path="/createPet/:ownerId/" component={CreatePetView}></Route>
+          <Route path="/createPerson" component={CreatePersonView}></Route>
+          <Route path="/updatePet/:petId" component={UpdatePetView}></Route>
+          <Route path="/updatePerson/:personId" component={UpdatePersonView}></Route>
+          <Route path="/pets/:ownerId/" component={ListPetsView}></Route>
         </Switch>
       </Router>
     </ApolloProvider>

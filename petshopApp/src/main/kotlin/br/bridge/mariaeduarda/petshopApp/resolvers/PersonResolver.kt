@@ -19,8 +19,8 @@ class PersonResolver(@Autowired val service: PersonService, @Autowired val petSe
         return service.findById(id.toLong())
     }
 
-    fun personsByName(name: String): List<Person>? {
-        return service.findByName(name)
+    fun personsByNameLike(name: String): List<Person>? {
+        return service.findByNameLike(name)
     }
 
     fun personPets(id: Int): List<Pet>? {

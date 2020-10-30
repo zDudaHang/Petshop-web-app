@@ -58,6 +58,7 @@
 
 .nav-menu-items {
   width: 100%;
+  list-style: none;
 }
 
 .nav-bar-toggle {

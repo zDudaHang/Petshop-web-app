@@ -3,12 +3,14 @@ import { useMutation } from '@apollo/client';
 import { CREATE_PET } from "../graphql/mutations";
 import { CreatePetResult } from "../types/Pet";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { PersonResult } from "../types/Person";
 import { PERSON } from "../graphql/queries";
 
 export function CreatePetView() {
+
+    const history = useHistory();
 
     const {ownerId} = useParams<{ownerId: string}>();
 
@@ -25,21 +27,24 @@ export function CreatePetView() {
     function handleSubmit(e: React.FormEvent, name: String, birthDate: String, ownerId: String) {
         e.preventDefault();
         newPet({variables: {name: name, birthDate: birthDate, ownerId: ownerId}})
+        if (data?.person) {
+            history.push(`/pets/${data?.person.id}`)
+        }
 
     }
 
     return (
         <>
-            <h2> Criando um pet para {data?.person.name} </h2>
-            <form onSubmit={(e) => handleSubmit(e, name, birthDate, ownerId)}>
+            <h2> Criando um pet para o(a) {data?.person.name} </h2>
+            <form className="form" onSubmit={(e) => handleSubmit(e, name, birthDate, ownerId)}>
                 <label>
                     Nome:
-                    <input type="text" name="name" value={name} onChange={e => setName(e.target.value)}/>
-                </label> <br/>
+                </label>
+                <input type="text" value={name} onChange={e => setName(e.target.value)}/>
                 <label>
                     Data de Nascimento:
-                    <input type="text" name="birthDate" value={birthDate} onChange={e => setBirthDate(e.target.value)}/>
                 </label>
+                <input type="text" value={birthDate} onChange={e => setBirthDate(e.target.value)}/>
                 <input type="submit" value="Enviar"/>
             </form>
         </>

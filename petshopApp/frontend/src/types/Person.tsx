@@ -16,6 +16,10 @@ export interface PersonResult {
     person: Person;
 }
 
+export interface PersonsByNameLikeResult {
+    personsByNameLike: Person[];
+}
+
 // TYPE FOR MUTATION: UPDATE_PERSON
 export interface UpdatePersonResult {
     updatePerson: Person;

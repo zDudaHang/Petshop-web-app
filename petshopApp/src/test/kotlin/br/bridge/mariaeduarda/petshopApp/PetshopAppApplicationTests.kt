@@ -25,23 +25,6 @@ class PetshopAppApplicationTests(
     }
 
     @Test
-    fun findPersonByBirthDate() {
-        val l: List<Person>? = personService.findByBirthDate(date = "22/01/1999")
-        assert(l?.count() == 1)
-        l?.iterator()?.forEach {
-            assert(it.name == "Maria")
-        }
-    }
-
-    @Test
-    fun findPersonByName() {
-        val l: List<Person>? = personService.findByName("Maria Eduarda")
-        l?.iterator()?.forEach {
-            assert(it.id == 3L)
-        }
-    }
-
-    @Test
     fun findPersonsByNameLike() {
         val l: List<Person>? = personService.findByNameLike("%Maria%")
         assert(l?.count() == 2)
@@ -56,31 +39,8 @@ class PetshopAppApplicationTests(
     }
 
     @Test
-    fun findPetByName() {
-        val l: List<Pet>? = petService.findByName("Bebel")
-        l?.iterator()?.forEach {
-            assert(it.id == 1L)
-        }
-    }
-
-    @Test
-    fun findPetByBirthDate() {
-        val l: List<Pet>? = petService.findByBirthDate(date = "22/01/2010")
-        assert(l?.count() == 1)
-        l?.iterator()?.forEach {
-            assert(it.name == "Bebel")
-        }
-    }
-
-    @Test
     fun findByOwnerId() {
         val l: List<Pet>? = petService.findByOwnerId(id = 1L)
-        assert(l?.count() == 3)
-    }
-
-    @Test
-    fun findByOwnerName() {
-        val l: List<Pet>? = petService.findByOwnerName("Maria")
         assert(l?.count() == 3)
     }
 

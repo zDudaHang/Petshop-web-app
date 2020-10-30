@@ -17,8 +17,8 @@ class PetResolver(@Autowired val service: PetService) : GraphQLQueryResolver {
         return service.findById(id.toLong())
     }
 
-    fun petsByName(name: String): List<Pet>? {
-        return service.findByName(name)
+    fun petsByNameLike(name: String): List<Pet>? {
+        return service.findByNameLike(name)
     }
 
 }

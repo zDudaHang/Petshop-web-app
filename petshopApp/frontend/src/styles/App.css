@@ -7,17 +7,6 @@
   font-family: "Lato", sans-serif;
 }
 
-.home,
-.about,
-.createPet,
-.createPerson {
-  /* display: table; */
-  height: 90vh;
-  /* align-items: ; */
-  justify-content: left;
-  font-size: 1rem;
-}
-
 .App {
   text-align: center;
 }

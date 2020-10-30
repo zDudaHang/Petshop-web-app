@@ -12,6 +12,10 @@ export interface PersonPetsResult {
     personPets: Pet[];
 }
 
+export interface PetsByNameLikeResult {
+    petsByNameLike: Pet[];
+}
+
 // TYPE FOR QUERY: PET
 export interface PetResult {
     pet: Pet;

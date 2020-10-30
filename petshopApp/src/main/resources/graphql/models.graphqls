@@ -1,12 +1,12 @@
 type Query {
     persons: [Person]
     person(id: Int!): Person
-    personsByName(name: String!): [Person]
+    personsByNameLike(name: String!): [Person]
     personPets(id: Int!): [Pet]
 
     pets: [Pet]
     pet(id: Int!): Pet
-    petsByName(name: String!): [Pet]
+    petsByNameLike(name: String!): [Pet]
 }
 
 type Mutation {

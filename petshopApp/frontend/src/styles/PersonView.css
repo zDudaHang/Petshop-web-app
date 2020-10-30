@@ -1,5 +1,5 @@
-.petView {
-  text-align: justify;
+.personView {
+  text-align: left;
   padding-bottom: 1em;
   padding-top: 1em;
   display: -moz-inline-grid;
@@ -20,7 +20,7 @@
   grid-area: 2/1/2/2;
 }
 
-.petView button {
+.personView button {
   text-align: center;
   margin-top: 0.5em;
 }
@@ -32,6 +32,6 @@
 }
 
 .deletar {
-  margin-left: 0;
+  margin-left: 2em;
   grid-area: 3/2/3/2;
 }
