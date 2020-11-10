@@ -17,7 +17,8 @@ class Pet(
 
         @ManyToOne
         @JoinColumn(name = "owner")
-        var owner: Person
+        var owner: Customer
+
 ) {
     override fun toString(): String {
         return "[PET #${id}] Name: ${name}, BirthDate: ${birthDate}, Owner: ${owner.toString()}"

@@ -1,49 +1,68 @@
 import React, { useEffect }  from 'react'
-import { Person, PersonsByNameLikeResult} from '../types/Person';
-import { PersonView } from './PersonView';
+import { useQuery } from '@apollo/client';
+import { Customer, CustomersByNameLikeResult} from '../types/Customer';
+import { CustomerView } from './Customer/CustomerView';
 import { useLazyQuery} from '@apollo/client';
 
 //  QUERIES:
-import { PERSONS_BY_NAME_LIKE, PETS_BY_NAME_LIKE } from '../graphql/queries';
+import { CUSTOMERS_BY_NAME_LIKE, PETS_BY_NAME_LIKE, USER } from '../graphql/queries';
 import { useState } from 'react';
 import { Pet, PetsByNameLikeResult } from '../types/Pet';
-import { PetView } from './PetView';
+import { PetView } from './Pet/PetView';
 import "../styles/SearchView.css";
+import { useParams } from 'react-router-dom';
+import { UserResult } from '../types/User';
 
 let timeout: NodeJS.Timeout;
 
-export function SearchView(props: any) {
+export interface SearchViewProps {
+    isLoggedIn: boolean,
+    isAdmin: boolean | undefined
+}
+
+export function SearchView(props: SearchViewProps) {
+
+    const { userId } = useParams<{userId: string}>();
+
+    const { data } = useQuery<UserResult>(USER, {
+        variables: { id: userId }
+    });
+
+    useEffect(() => {
+        console.log(`[SEARCH VIEW] userId: ${userId} DATA:`)
+        console.log(data)
+    }, [data, userId])
 
     const [ findPets, { data:pets} ] = useLazyQuery<PetsByNameLikeResult>(PETS_BY_NAME_LIKE);
 
-    const [ findPersons, { data:persons} ] = useLazyQuery<PersonsByNameLikeResult>(PERSONS_BY_NAME_LIKE);
+    const [ findCustomers, { data:customers} ] = useLazyQuery<CustomersByNameLikeResult>(CUSTOMERS_BY_NAME_LIKE);
 
     // Controlling results
-    const [ resultPersons, setPersons ] = useState<Person[]>([]);
+    const [ resultCustomers, setCustomers ] = useState<Customer[]>([]);
     const [ resultPets, setPets ] = useState<Pet[]>([]);
 
     // Controlling check-boxes
     const [ isPetEnabled, setPetEnabled ] = useState(false);
-    const [ isPersonEnabled, setPersonEnabled ] = useState(true);
+    const [ isCustomerEnabled, setCustomerEnabled ] = useState(true);
 
     const [ text, setText ] = useState("");
 
     useEffect(() => {
-        if (isPersonEnabled) {
-            findPersons({variables: {name: text}})
+        if (isCustomerEnabled) {
+            findCustomers({variables: {name: text}})
         }
         if (isPetEnabled) {
             findPets({variables: {name: text}})
         }
 
-        if (persons?.personsByNameLike) {
-            setPersons(persons.personsByNameLike);
+        if (customers?.customersByNameLike) {
+            setCustomers(customers.customersByNameLike);
         }
         if (pets?.petsByNameLike) {
             setPets(pets.petsByNameLike);
         }
         
-    }, [findPersons, findPets, isPersonEnabled, isPetEnabled, persons, pets, text]);
+    }, [customers, findCustomers, findPets, isCustomerEnabled, isPetEnabled, pets, props, resultCustomers, resultPets, text]);
 
     return (
         <>
@@ -61,13 +80,13 @@ export function SearchView(props: any) {
                     Pet
                 </label>
                 <label>
-                    <input  type="checkbox" checked={isPersonEnabled} onChange={() => setPersonEnabled(!isPersonEnabled)}/>
-                    Pessoa
+                    <input  type="checkbox" checked={isCustomerEnabled} onChange={() => setCustomerEnabled(!isCustomerEnabled)}/>
+                    Cliente
                 </label>
                 <div className="home">
-                    {resultPersons ? resultPersons.map( (person) => (
-                        <div key={person.id}>
-                                <PersonView person={person}/>
+                    {resultCustomers ? resultCustomers.map( (customer) => (
+                        <div key={customer.id}>
+                                <CustomerView customer={customer}/>
                         </div>
                     )) : null }
                     {resultPets ? resultPets.map( (pet) => (

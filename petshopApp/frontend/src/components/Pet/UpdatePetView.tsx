@@ -1,24 +1,25 @@
 import React, { useEffect } from "react";
-import { PetResult, UpdatePetResult } from "../types/Pet";
+import { PetResult, UpdatePetResult } from "../../types/Pet";
 import { useQuery, useMutation } from '@apollo/client';
-import { UPDATE_PET } from "../graphql/mutations";
+import { UPDATE_PET } from "../../graphql/mutations";
 import { useParams } from "react-router-dom";
-import { PET } from "../graphql/queries";
+import { PET } from "../../graphql/queries";
 import { useState } from "react";
-import "../styles/Form.css";
-import { formatDate } from "../util";
+import { formatDate } from "../../util/util";
+
+import "../../styles/Form.css";
 
 export function UpdatePetView() {
 
     const {petId} = useParams<{petId: string}>();
 
-    const { data } = useQuery<PetResult>(PET, {
+    const { loading, data } = useQuery<PetResult>(PET, {
         variables: { id: petId }
     });
 
     const [newName, setNewName] = useState("")
 
-    const [updatePet, { data:newPet }] = useMutation<UpdatePetResult>(UPDATE_PET);
+    const [updatePet, ] = useMutation<UpdatePetResult>(UPDATE_PET);
 
     // Apos a primeira renderizacao vou alterar o newName
     useEffect( () => {
@@ -30,7 +31,6 @@ export function UpdatePetView() {
     function handleSubmit(e: React.FormEvent, petId: String, newName: String) {
         e.preventDefault();
         updatePet({variables: {id: petId, newName: newName}})
-        console.log(`The pet #${newPet?.updatePet.id} has a new name ${newPet?.updatePet.name}`)
     }
 
     if (data?.pet) {
@@ -52,8 +52,16 @@ export function UpdatePetView() {
             </>
         );
     } else { 
-        return (
-            <h1> Carregando... </h1>
-        );
+        if (loading) {   
+            return (
+                <h1> Carregando... </h1>
+            );
+        }
+
+        else {
+            return (
+                <h1> Opa, algo deu errado :( </h1>
+            );
+        }
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table
-data class Person(
+data class Customer(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null,
 
@@ -16,11 +16,17 @@ data class Person(
         @Column(name = "birth_date")
         val birthDate: LocalDate,
 
-        @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL])
+        @OneToMany(mappedBy = "owner")
         @JsonIgnore
-        var pets: List<Pet>? = null
+        var pets: List<Pet>? = null,
+
+        @Column
+        var debt: Float = 0F
 ) {
     override fun toString(): String {
-        return "[PERSON #${id}] Name: ${name}, BirthDate: $birthDate"
+        return "[CUSTOMER #${id}] " +
+                "Name: ${name}, " +
+                "BirthDate: $birthDate" +
+                "Debt: R$$debt"
     }
 }

@@ -1,6 +1,6 @@
 package br.bridge.mariaeduarda.petshopApp.services
 
-import br.bridge.mariaeduarda.petshopApp.entities.Person
+import br.bridge.mariaeduarda.petshopApp.entities.Customer
 import br.bridge.mariaeduarda.petshopApp.entities.Pet
 import br.bridge.mariaeduarda.petshopApp.repositories.PetRepository
 import br.bridge.mariaeduarda.petshopApp.util.DateFormatter
@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class PetService(@Autowired val repo: PetRepository, @Autowired val personService: PersonService) {
+class PetService(
+        @Autowired val repo: PetRepository,
+        @Autowired val customerService: CustomerService
+) {
 
     fun save(name: String, birthDate: String, ownerId: Int): Pet? {
-        val owner: Person? = personService.findById(ownerId.toLong())
+        val owner: Customer? = customerService.findById(ownerId.toLong())
         if (owner != null) {
             val p = Pet(name = name, birthDate = DateFormatter.formatDate(birthDate), owner = owner)
             repo.save(p)

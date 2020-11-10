@@ -1,30 +1,30 @@
 import React from "react";
-import { PersonPetsResult } from "../types/Pet";
+import { CustomerPetsResult } from "../types/Pet";
 import { useQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
-import { PERSON, PERSON_PETS } from "../graphql/queries";
-import { PetView } from "./PetView";
-import { PersonResult } from "../types/Person";
+import { CUSTOMER, CUSTOMER_PETS } from "../graphql/queries";
+import { PetView } from "./Pet/PetView";
+import { CustomerResult } from "../types/Customer";
 import "../styles/ListPetView.css";
 
 export function ListPetsView() {
 
-    const {ownerId} = useParams<{ownerId: string}>();
+    const { ownerId } = useParams<{ownerId: string}>();
 
-    const { data } = useQuery<PersonPetsResult>(PERSON_PETS, {
+    const { data } = useQuery<CustomerPetsResult>(CUSTOMER_PETS, {
         variables: { id: ownerId }
     });
 
-    const { data:owner } = useQuery<PersonResult>(PERSON, {
+    const { data:owner } = useQuery<CustomerResult>(CUSTOMER, {
         variables: { id: ownerId }
     });
 
-    if (data?.personPets && owner?.person) {
-        if (data.personPets.length > 0) {
+    if (data?.customerPets && owner?.customer) {
+        if (data.customerPets.length > 0) {
             return (
                 <>
-                    <h1> Pets do(a) {owner.person.name} </h1>
-                        {data.personPets.map( (pet) => (
+                    <h1> Pets do(a) {owner.customer.name} </h1>
+                        {data.customerPets.map( (pet) => (
                             <div key={pet.id}>
                                 <PetView pet={pet}/>
                             </div>
@@ -34,14 +34,17 @@ export function ListPetsView() {
         } else {
             return (
                 <>
-                    <h1>{owner.person.name} não tem pets </h1>
+                    <h1>{owner.customer.name} não tem pets </h1>
                 </>
             );
         }
+    } else {
+        return (
+            <>
+                <h1>Opa, aconteceu algo errado :( </h1>
+            </>
+        );
     }
 
-    return (
-        <h1> Carregando... </h1>
-    );
 
 }

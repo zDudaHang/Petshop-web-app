@@ -1,10 +1,11 @@
 import React from 'react'
 import { useMutation } from '@apollo/client';
-import { DELETE_PET } from '../graphql/mutations';
+import { DELETE_PET } from '../../graphql/mutations';
 import { useHistory } from 'react-router-dom';
-import { Pet } from '../types/Pet';
-import "../styles/PetView.css"
-import { formatDate } from '../util';
+import { Pet } from '../../types/Pet';
+import { formatDate } from "../../util/util";
+
+import "../../styles/PetView.css"
 
 export interface PetViewProps {
     pet: Pet;

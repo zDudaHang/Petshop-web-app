@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_PERSON = gql`
-    mutation CreatePerson($name: String!, $birthDate: String!) {
-        newPerson(name: $name, birthDate: $birthDate ) {
+export const CREATE_CUSTOMER = gql`
+    mutation CreateCustomer($name: String!, $birthDate: String!) {
+        newCustomer(name: $name, birthDate: $birthDate ) {
             id
             name
             birthDate
@@ -10,9 +10,9 @@ export const CREATE_PERSON = gql`
     }
 `;
 
-export const UPDATE_PERSON = gql`
-    mutation UpdatePerson($id: Int!, $newName: String!) {
-        updatePerson(id: $id, newName: $newName) {
+export const UPDATE_CUSTOMER = gql`
+    mutation UpdateCustomer($id: Int!, $newName: String!) {
+        updateCustomer(id: $id, newName: $newName) {
             id
             name
             birthDate
@@ -20,9 +20,9 @@ export const UPDATE_PERSON = gql`
     }
 `;
 
-export const DELETE_PERSON = gql`
-    mutation DeletePerson($id: Int!) {
-        deletePerson(id: $id)
+export const DELETE_CUSTOMER = gql`
+    mutation DeleteCustomer($id: Int!) {
+        deleteCustomer(id: $id)
     }
 `;
 

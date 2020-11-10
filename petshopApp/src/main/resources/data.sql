@@ -1,14 +1,11 @@
-INSERT INTO PERSON (name, birth_date)
+INSERT INTO CUSTOMER (name, birth_date, debt)
 VALUES
-('Maria', '1999-01-22'),
-('Marcos', '2010-01-30'),
-('Maria Eduarda', '2000-01-30'),
-('João', '2005-01-30');
+('Maria', '1999-01-22', 1000),
+('Marcos', '2010-01-30', 500),
+('João', '2005-01-30', 0);
 
-
---INSERT INTO PET (id, name, birth_date, owner)
---VALUES
---('Bebel', '2010-01-22', 1),
---('Foguete', '2015-02-22', 2),
---('Pinga', '2010-01-22', 1),
---('Bob', '2010-01-22', 1);
+INSERT INTO USERS (username, password, is_admin, is_vet)
+VALUES
+('func', 'func', false, false),
+('vet', 'vet', false, true),
+('admin', 'admin', true, false);
