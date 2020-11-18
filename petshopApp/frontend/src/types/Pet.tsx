@@ -7,9 +7,9 @@ export interface Pet {
     birthDate: string;
 }
 
-// TYPE FOR QUERY: PERSON_PETS
-export interface PersonPetsResult {
-    personPets: Pet[];
+// TYPE FOR QUERY: CUSTOMER_PETS
+export interface CustomerPetsResult {
+    customerPets: Pet[];
 }
 
 export interface PetsByNameLikeResult {

@@ -1,35 +1,54 @@
 type Query {
-    persons: [Person]
-    person(id: Int!): Person
-    personsByNameLike(name: String!): [Person]
-    personPets(id: Int!): [Pet]
+    customers: [Customer]
+    customer(id: Int!): Customer
+    customersByNameLike(name: String!): [Customer]
+    customerPets(id: Int!): [Pet]
+    sumDebts: Float!
 
     pets: [Pet]
     pet(id: Int!): Pet
     petsByNameLike(name: String!): [Pet]
+
+    users: [User]
+    auth(username: String!, password: String!): User
+    user(id: Int!): User
 }
 
 type Mutation {
-    newPerson(name: String!, birthDate: String!): Person!
-    updatePerson(id: Int!, newName: String!): Person!
-    deletePerson(id: Int!): Boolean
+    newCustomer(name: String!, birthDate: String!): Customer!
+    updateCustomer(id: Int!, newName: String!): Customer!
+    deleteCustomer(id: Int!): Boolean
+
+    addDebt(id: Int!, value: String!): Customer
+    removeDebt(id: Int!, value: Float!): Customer
 
     newPet(name: String!, birthDate: String!, ownerId: Int!): Pet!
     updatePet(id: Int!, newName: String!): Pet!
     deletePet(id: Int!) : Boolean
 
+    newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!): User!
+
 }
 
-type Person {
+type Customer {
     id: Int!
     name: String!
     birthDate: String!
     pets: [Pet]
+    debt: Float!
 }
 
 type Pet {
     id: Int!
     name: String!
     birthDate: String!
-    owner: Person!
+    owner: Customer!
+}
+
+type User {
+    id: Int!
+    username: String!
+    password: String!
+    isAdmin: Boolean!
+    isVet: Boolean!
 }

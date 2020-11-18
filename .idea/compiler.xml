@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Petshop-web-app" />
         <module name="petshopApp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Petshop-web-app" target="1.5" />
       <module name="petshopApp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
