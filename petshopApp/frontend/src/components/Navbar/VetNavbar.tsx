@@ -5,13 +5,13 @@ import { NavItem } from "./NavItem";
 
 export function VetNavbar() {
 
-    const context = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     
     return (
         <>
-            {(context.isLoggedIn && context?.user?.isVet) &&
+            { user!.isVet &&
                 <>
-                    <NavItem title="Buscar" path="/search" icon={<FaSearch/>}/>
+                    <NavItem title="Buscar" path="/" icon={<FaSearch/>}/>
                     <NavItem title="Adicionar um cliente" icon={<FaUserPlus/>}/>
                     <NavItem path="/calendar/:vetId" title="Consultas marcadas" icon={<FaCalendar/>}/>
                 </>

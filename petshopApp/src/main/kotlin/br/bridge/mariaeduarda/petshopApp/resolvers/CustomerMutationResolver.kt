@@ -20,8 +20,8 @@ class CustomerMutationResolver(@Autowired val service: CustomerService) : GraphQ
         return service.delete(id)
     }
 
-    fun addDebt(id: Int, value: Float): Customer? {
-        return service.addDebt(id, value)
+    fun addDebt(id: Int, value: String): Customer? {
+        return service.addDebt(id, value.toFloat())
     }
 
     fun removeDebt(id: Int, value: Float): Customer? {

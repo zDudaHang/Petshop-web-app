@@ -1,36 +1,53 @@
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../config/client";
-import { SearchView } from "./SearchView";
-import { AboutView } from "./AboutView"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+// Views:
+import { SearchCustomerView } from "./SearchCustomerView";
 import { CreatePetView } from "./Pet/CreatePetView";
-import { CreatePersonView } from "./Customer/CreatePersonView";
+import { CreateCustomerView } from "./Customer/CreateCustomerView";
 import { UpdatePetView } from "./Pet/UpdatePetView";
 import { UpdateCustomerView } from "./Customer/UpdateCustomerView";
-import { ListPetsView } from "./ListPetsView";
-import { LoginView } from "./LoginView";
+import { ListPetsView } from "./Pet/ListPetsView";
+
+// Navbar:
+import { Navbar } from "./Navbar/Navbar";
+import { UserNavbarView } from "./Navbar/UserNavbarView";
+import { AdminNavbar } from "./Navbar/AdminNavbar";
+import { VetNavbar } from "./Navbar/VetNavbar";
+import { EmployeeNavbar } from "./Navbar/EmployeeNavbar";
+import { SearchPetView } from "./SearchPetView";
+import { CreateUserView } from "./User/CreateUserView";
+import PrivateRoute from "./PrivateRoute";
+import { AddDebtView } from "./Customer/AddDebtView";
+import { AboutView } from "./AboutView";
+import { ListUserView } from "./User/ListUserView";
 
 export function Home() {
 
   return (
     <ApolloProvider client={client}>
-            {/* <Navbar>
+            <Navbar>
                   <UserNavbarView/>
                   <AdminNavbar/>
                   <VetNavbar/>
-                  <FuncNavbar/>
-            </Navbar> */}
+                  <EmployeeNavbar/>
+            </Navbar>
             <Router>
               <Switch>
-                <Route exact path="/" component={LoginView}/>
-                <Route path="/search" component={SearchView}/>
-                <Route path="/about" component={AboutView}/>
+                <Route exact path="/" component={SearchCustomerView}/>
+                <Route path="/searchCustomer" component={SearchCustomerView}/>
+                <Route path="/searchPet" component={SearchPetView}/>
+                <PrivateRoute path="/users" component={ListUserView}/>
                 <Route path="/createPet/:ownerId/" component={CreatePetView}/>
-                <Route path="/createCustomer" component={CreatePersonView}/>
+                <Route path="/createCustomer" component={CreateCustomerView}/>
+                <PrivateRoute path="/createUser" component={CreateUserView}/>
+                <Route path="/addDebt/:customerId" component={AddDebtView}/>
                 <Route path="/updatePet/:petId" component={UpdatePetView}/>
                 <Route path="/updateCustomer/:customerId" component={UpdateCustomerView}/>
                 <Route path="/pets/:ownerId/" component={ListPetsView}/>
+                <Route path="/about" component={AboutView}/>
               </Switch>
             </Router>
     </ApolloProvider>

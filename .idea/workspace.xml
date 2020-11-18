@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1b7e2d1f-6a9f-4f3c-9a5b-6e727f38724f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/f/0f1348342d1bb532c50c7be6743ab42b9469c98b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/5/153ab96ad16087ca94e8c5cd8dd25d04c29ad6d2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/700e5df07b128d74cabaef9ffac41a6e44b77242" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8ef59e4dfcb14b30ce68dfdd20711da2f2421c83" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/d/bd98def4da0d9348579815936a9d638b76816d7f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Petshop-web-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Petshop-web-app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/saveactions_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/AuthContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/AboutView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/AboutView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/CreateView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Customer/CreatePersonView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Customer/CustomerView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Customer/CustomerView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Customer/UpdateCustomerView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Customer/UpdateCustomerView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/ListPetsView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/LoginView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/AdminNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/AdminNavbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/FuncNavbar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/UserNavbarView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/UserNavbarView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/VetNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Navbar/VetNavbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Pet/CreatePetView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Pet/CreatePetView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Pet/PetView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Pet/PetView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/Pet/UpdatePetView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/components/Pet/UpdatePetView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/components/SearchView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/graphql/mutations.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/graphql/mutations.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/graphql/queries.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/graphql/queries.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/styles/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/styles/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/styles/CustomerView.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/styles/Form.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/styles/ListPetView.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/styles/PetView.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/styles/SearchView.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/styles/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/styles/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/types/Context.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/types/Context.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/types/Customer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/types/Customer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/src/types/User.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/src/types/User.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/frontend/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/src/main/kotlin/br/bridge/mariaeduarda/petshopApp/resolvers/CustomerMutationResolver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/src/main/kotlin/br/bridge/mariaeduarda/petshopApp/resolvers/CustomerMutationResolver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/src/main/kotlin/br/bridge/mariaeduarda/petshopApp/services/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/src/main/kotlin/br/bridge/mariaeduarda/petshopApp/services/UserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petshopApp/src/main/resources/graphql/models.graphqls" beforeDir="false" afterPath="$PROJECT_DIR$/petshopApp/src/main/resources/graphql/models.graphqls" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1k8skF7f1o1LlCKReln6cvnhO7Y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunManager">
+    <configuration name="PetshopAppApplicationKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="petshopApp" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="br.bridge.mariaeduarda.petshopApp.PetshopAppApplicationKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.PetshopAppApplicationKt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b7e2d1f-6a9f-4f3c-9a5b-6e727f38724f" name="Default Changelist" comment="" />
+      <created>1605093694048</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605093694048</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2581" y="365" width="588" height="357" key="#Notifications" timestamp="1605108608157">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2581" y="365" width="588" height="357" key="#Notifications/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605108608157" />
+    <state x="699" y="223" width="583" height="668" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1605267105244">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="699" y="223" width="583" height="668" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605267105244" />
+    <state width="1802" height="293" key="GridCell.Tab.0.bottom" timestamp="1605734286574">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.bottom/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605112482220" />
+    <state width="1802" height="293" key="GridCell.Tab.0.bottom/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605734286574" />
+    <state width="1802" height="293" key="GridCell.Tab.0.center" timestamp="1605734286573">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.center/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605112482220" />
+    <state width="1802" height="293" key="GridCell.Tab.0.center/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605734286573" />
+    <state width="1802" height="293" key="GridCell.Tab.0.left" timestamp="1605734286573">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.left/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605112482220" />
+    <state width="1802" height="293" key="GridCell.Tab.0.left/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605734286573" />
+    <state width="1802" height="293" key="GridCell.Tab.0.right" timestamp="1605734286574">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1874" height="284" key="GridCell.Tab.0.right/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605112482220" />
+    <state width="1802" height="293" key="GridCell.Tab.0.right/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605734286574" />
+    <state x="2413" y="198" width="924" height="691" key="Maven.ArtifactSearchDialog" timestamp="1605094847816">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2413" y="198" width="924" height="691" key="Maven.ArtifactSearchDialog/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605094847816" />
+    <state x="501" y="198" width="1022" height="766" key="SettingsEditor" timestamp="1605267031887">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="2366" y="175" width="1022" height="766" key="SettingsEditor/72.27.1848.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1605108317387" />
+    <state x="501" y="198" key="SettingsEditor/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605267031887" />
+  </component>
+</project>

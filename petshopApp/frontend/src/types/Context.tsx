@@ -1,8 +1,6 @@
-import { User } from "./User"
+import { User } from "./User";
 
 export interface UserContext {
-    isLoggedIn: boolean,
-    user?: User,
-    login?: (user: User) => {},
-    logout?: () => {}
+    user: User | undefined
+    // changeActualUser: ((id: number) => {}) | undefined
 }

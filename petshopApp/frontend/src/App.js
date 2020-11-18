@@ -1,53 +1,45 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { Home } from "./components/Home";
 import { AuthContext } from "./AuthContext"
-import { Navbar } from "./components/Navbar/Navbar";
-import { UserNavbarView } from "./components/Navbar/UserNavbarView";
-import { AdminNavbar } from "./components/Navbar/AdminNavbar";
-import { FuncNavbar } from "./components/Navbar/FuncNavbar";
-import { VetNavbar } from "./components/Navbar/VetNavbar";
 
 import "./styles/App.css";
 
 function App() {
-  const [user, setUser] = useState({});
+  const users = [
+    {
+      id: 0,
+      username: "Admin",
+      password: "admin123",
+      isAdmin: true,
+      isVet: false,
+    },
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
+    {
+      id: 1,
+      username: "Employee",
+      password: "employee123",
+      isAdmin: false,
+      isVet: false,
+    },
 
-  useEffect(() => {
-    console.log(`[APP] ${isLoggedIn ? "ON" : "OFF"}`)
-    console.log(`[APP] IsAdmin? ${user?.isAdmin}`)
-  }, [isLoggedIn, user]);
-  
+    {
+      id: 2,
+      username: "Vet",
+      password: "vet123",
+      isAdmin: false,
+      isVet: true,
+    }
+  ]
 
-  const login = (user) => {
-    console.log("LOGIN")
-    setUser(user)
-    setLoggedIn(true)
-  }
-
-  const logout = () => {
-    console.log("LOGOUT")
-    setLoggedIn(false);
-    setUser({})
-  }
+  let actualUser = users[0]
 
   const value = {
-    isLoggedIn: isLoggedIn,
-    user: user,
-    login: login,
-    logout: logout
+    user: actualUser
   }
 
   return (
     <div className="App">
-      <AuthContext.Provider value={value}>
-        <Navbar>
-                  <UserNavbarView user={user}/>
-                  <AdminNavbar/>
-                  <VetNavbar/>
-                  <FuncNavbar/>
-        </Navbar>
+      <AuthContext.Provider value={ value }>
         <Home/>
       </AuthContext.Provider>
     </div>

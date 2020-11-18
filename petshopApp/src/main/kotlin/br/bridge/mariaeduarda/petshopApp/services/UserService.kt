@@ -10,10 +10,8 @@ import java.util.*
 class UserService(@Autowired val repo: UserRepository) {
     fun auth(username: String, password: String): User? {
         val user: User? = repo.findByUsername(username)
-        if (user != null) {
-            if (user.password == password) {
-                return user
-            }
+        if (user != null && user.password == password) {
+            return user
         }
 
         return null
@@ -26,5 +24,11 @@ class UserService(@Autowired val repo: UserRepository) {
     fun findById(id: Long): User? {
         val u: Optional<User> = repo.findById(id)
         return u.get()
+    }
+
+    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean): User {
+        val u = User(username = username, password = password, isAdmin = isAdmin, isVet = isVet)
+        repo.save(u)
+        return u
     }
 }

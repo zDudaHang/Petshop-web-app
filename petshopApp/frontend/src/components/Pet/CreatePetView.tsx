@@ -1,54 +1,99 @@
-import React from "react";
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
 import { useMutation } from '@apollo/client';
 import { CREATE_PET } from "../../graphql/mutations";
 import { CreatePetResult } from "../../types/Pet";
-import { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { CustomerResult } from "../../types/Customer";
 import { CUSTOMER } from "../../graphql/queries";
+import { Field, Form, FormRenderProps } from "react-final-form";
+import { Alert, Button, Cell, Grid, Heading, HFlow, VFlow } from "bold-ui";
+import { MaskedTextFieldAdapter, TextFieldAdapter } from '../Adapters';
+import { ErrorView } from '../ErrorView';
 
 export function CreatePetView() {
 
-    const history = useHistory();
-
     const {ownerId} = useParams<{ownerId: string}>();
 
-    const {data} = useQuery<CustomerResult>(CUSTOMER, {
+    const {loading, data: owner} = useQuery<CustomerResult>(CUSTOMER, {
         variables: { id: ownerId }
     })
 
-    const [newPet] = useMutation<CreatePetResult>(CREATE_PET);
+    const [newPet, {data:pet}] = useMutation<CreatePetResult>(CREATE_PET);
 
-    const [name, setName] = useState("")
-
-    const [birthDate, setBirthDate] = useState("")
-
-    function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        newPet({variables: {name: name, birthDate: birthDate, ownerId: ownerId}})
-        if (data?.customer) {
-            history.push(`/pets/${data?.customer.id}`)
-        }
-
+    function handleSubmit({name, birthdate}: any) {
+        newPet({variables: {name: name, birthDate: birthdate, ownerId: ownerId}})
     }
 
-    // const input1: InputProps = {label: "Nome", type: "text", value:"name", onChange:(e) => setName(e}
+    const renderForm = (props: FormRenderProps) => {
+        return (
+            <VFlow>
+                {pet?.newPet &&
+                    <Alert type='success'>
+                        Pet criado com sucesso !
+                    </Alert>
+                }
+                <Heading level={1}>
+                    Criando um pet para o(a) {owner?.customer.name}
+                </Heading>
+                <form onSubmit={props.handleSubmit}>
+                    <Grid wrap>
+                        <Cell xs={6}>
+                            <Field
+                                component={TextFieldAdapter}
+                                name="name"
+                                label="Nome"
+                                placeholder="Nome do Pet"
+                                required
+                            />
+                        </Cell>
+                        <Cell xs={6}>
+                            <Field
+                                component={MaskedTextFieldAdapter}
+                                name="birthdate"
+                                guide
+                                required
+                                label="Data de Aniversário" 
+                                mask={[/\d/,/\d/,'/',/\d/,/\d/,'/',/\d/,/\d/,/\d/,/\d/]}
+                                placeholder="dd/mm/aaaa"
+                            />
+                        </Cell>
+                        <Cell xs={12}>
+                            <HFlow justifyContent="flex-start">
+                                <Button type="reset" kind="normal" size="small" onClick={props.form.reset}>
+                                    Limpar
+                                </Button>
+                                <Button type="submit" kind="primary" size="small">
+                                    Enviar
+                                </Button>
+                            </HFlow>
+                        </Cell>
+                    </Grid>
+                </form>
+            </VFlow>
+        )
+    }
 
-    return (
-        <>
-            <h2> Criando um pet para o(a) {data?.customer.name}" </h2>
-            <form className="form" onSubmit={(e) => handleSubmit(e)}>
-                <label>
-                    Nome:
-                </label>
-                <input type="text" value={name} onChange={e => setName(e.target.value)}/>
-                <label>
-                    Data de Nascimento:
-                </label>
-                <input type="text" value={birthDate} onChange={e => setBirthDate(e.target.value)}/>
-                <input type="submit" value="Enviar"/>
-            </form>
-        </>
-    );
+    if (loading) {
+        return (
+            <VFlow>
+                <Heading style={{textAlign: 'center'}} color="normal" level={1}>
+                    Carregando...
+                </Heading>
+            </VFlow>
+        );
+    } else {
+        return (
+            <HFlow style={css`margin: 1rem`} justifyContent="center">
+                {owner  ? 
+                    <Form
+                        onSubmit={handleSubmit}
+                        render={renderForm}/>
+                :
+                    <ErrorView/>
+                }
+            </HFlow>
+        );
+    }
 }

@@ -92,7 +92,6 @@ query user($id: Int!) {
 }
 `;
 
-
 export const USER_AUTH = gql`
   query auth($username: String!, $password: String!) {
     auth(username: $username, password: $password) {
@@ -105,6 +104,17 @@ export const USER_AUTH = gql`
   }
 `;
 
+
+export const USERS = gql`
+query users {
+  users {
+    id
+    username
+    isAdmin
+    isVet
+  }
+}
+`;
 
 
 

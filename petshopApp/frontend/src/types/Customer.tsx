@@ -7,6 +7,12 @@ export interface Customer {
     debt: number;
 }
 
+export interface CustomerWithoutBirthDate {
+    id: number;
+    name: string;
+    debt: number;
+}
+
 // TYPE FOR QUERY: CUSTOMERS
 export interface CustomersResult {
     customer: Customer[];
@@ -17,16 +23,20 @@ export interface CustomerResult {
     customer: Customer;
 }
 
+export interface CustomerAddDebtResult {
+    addDebt: CustomerWithoutBirthDate;
+}
+
 export interface CustomersByNameLikeResult {
     customersByNameLike: Customer[];
 }
 
 // TYPE FOR MUTATION: UPDATE_CUSTOMER
 export interface UpdateCustomerResult {
-    updatePerson: Customer;
+    updateCustomer: Customer;
 }
 
 // TYPE FOR MUTATION: CREATE_CUSTOMER
 export interface CreateCustomerResult {
-    newPerson: Customer;
+    newCustomer: Customer;
 }

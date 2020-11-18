@@ -56,3 +56,26 @@ export const DELETE_PET = gql`
         deletePet(id: $id)
     }
 `;
+
+export const CREATE_USER = gql`
+    mutation CreateUser($username: String!, $password: String!, $isAdmin: Boolean!, $isVet: Boolean!) {
+        newUser(username: $username, password: $password, isAdmin: $isAdmin, isVet: $isVet ) {
+            id
+            username
+            password
+            isAdmin
+            isVet
+        }
+    }
+`;
+
+export const ADD_DEBT = gql`
+mutation AddDebt($id: Int!, $value: String!) {
+    addDebt(id: $id, value: $value) {
+        id
+        name
+        birthDate
+        debt
+    }
+}
+`;

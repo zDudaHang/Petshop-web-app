@@ -6,23 +6,29 @@ import { DropDownItem } from "./DropDownItem";
 import { DropDownMenu } from "./DropDownMenu";
 import { NavItem } from "./NavItem";
 import AuthContext from "../../AuthContext";
+import { Icon } from "bold-ui";
 
 export function AdminNavbar() {
 
-    const context = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     
     return (
         <>
-            {(context.isLoggedIn && context?.user?.isAdmin) ?
+            { user!.isAdmin ?
                 <>
-                    <NavItem title="Buscar" path="/search" icon={<FaSearch/>}/>
+                    <NavItem title="Buscar" icon={<FaSearch/>}>
+                        <DropDownMenu>
+                            <DropDownItem path="/searchPet" leftIcon={<Icon icon='petFilled'/>}> Pet </DropDownItem>
+                            <DropDownItem path="/searchCustomer" leftIcon={<Icon icon='userFilled'/>}> Cliente </DropDownItem>
+                        </DropDownMenu>
+                    </NavItem>
                     <NavItem title="Adicionar" icon={<FaUserPlus/>}>
                         <DropDownMenu>
-                            <DropDownItem path="#" leftIcon={<FaPlus/>}> Funcionário </DropDownItem>
+                            <DropDownItem path="/createUser" leftIcon={<FaPlus/>}> Funcionário </DropDownItem>
                             <DropDownItem path="/createCustomer" leftIcon={<FaPlus/>}> Cliente </DropDownItem>
                         </DropDownMenu>
                     </NavItem>
-                    <NavItem path="#" title="Listar funcionários" icon={<BsPersonLinesFill/>}/>
+                    <NavItem path="/users" title="Listar funcionários" icon={<BsPersonLinesFill/>}/>
                     <NavItem path="#" title="Gerar relatório financeiro" icon={<MdAttachMoney/>}/>
                 </>
             : null }

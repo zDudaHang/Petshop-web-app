@@ -101,10 +101,3 @@ a {
 .menu-item:hover {
   background-color: #525357;
 }
-
-.navbar-user p {
-  position: absolute;
-  top: calc(var(--nav-size) * 0.3);
-  left: 45%;
-  color: var(--text-color);
-}

@@ -7,7 +7,18 @@ export interface User {
     isVet: boolean;
 }
 
-// TYPE FOR QUERY: USER_AUTH
-export interface UserResult {
-    auth: User;
+export interface UserWithoutPassword {
+    id: number;
+    username: string;
+    isAdmin: boolean;
+    isVet: boolean;
+}
+
+// TYPE FOR MUTATION: CREATE_USER
+export interface CreateUserResult {
+    newUser: User;
+}
+
+export interface UsersResult {
+    users: UserWithoutPassword[]
 }

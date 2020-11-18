@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useMutation } from '@apollo/client';
 import { DELETE_CUSTOMER } from '../../graphql/mutations';
 import { useHistory } from 'react-router-dom';
 import { Customer } from '../../types/Customer';
 import { formatDate } from "../../util/util";
-import "../../styles/CustomerView.css"
+
+import { Button, Tooltip, Icon, TableRow, TableCell, Currency } from 'bold-ui'
+
+import AuthContext from '../../AuthContext';
+import { MdAttachMoney } from 'react-icons/md';
+import { css } from '@emotion/core';
 
 export interface CustomerViewProps {
     customer: Customer;
 }
 
 export function CustomerView(props: CustomerViewProps) {
+
+    const {user} = useContext(AuthContext);
 
     const [deleteCustomer] = useMutation(DELETE_CUSTOMER);
 
@@ -28,15 +35,53 @@ export function CustomerView(props: CustomerViewProps) {
         history.push(`/pets/${props.customer.id}`)
     }
 
+    const routeAddDebt = () => {
+        history.push(`/addDebt/${props.customer.id}`)
+    }
+
     return(
-        <div className="customerView">
-            <div className="name"> {props.customer.name} </div>
-            <div className="info"> Data de Nascimento: {formatDate(props.customer.birthDate)} </div>
-            <button className="alterar" onClick={routeUpdate}>Alterar</button>
-            <button className="deletar"onClick={() => deleteCustomer( { variables: {id: props.customer.id} } ) }>Deletar</button>
-            <button onClick={routePets}>Ver pets</button>
-            <button onClick={routeNewPet}>Adicionar um pet</button>    
-        </div>
+            <TableRow key={props.customer.id}>
+                <TableCell>
+                    {props.customer.id}
+                </TableCell>
+                <TableCell>
+                    {props.customer.name}
+                </TableCell>
+                <TableCell>
+                    {formatDate(props.customer.birthDate)}
+                </TableCell>
+                {user!.isAdmin && <TableCell>
+                    <Currency currency="BRL" value={props.customer.debt}/>
+                </TableCell>
+                }       
+                <TableCell>
+                    <Tooltip text='Alterar' placement='bottom'>
+                        <Button style={css`margin-right: 0.5rem`} kind='normal' size='small' onClick={routeUpdate} >
+                            <Icon icon='penFilled'/>
+                        </Button>
+                    </Tooltip>
+                    <Tooltip text='Deletar' placement='bottom'>
+                        <Button style={css`margin-right: 0.5rem`} kind='normal' size='small' onClick={() => deleteCustomer( { variables: {id: props.customer.id} } ) }>
+                            <Icon icon='trashFilled'/>
+                        </Button>
+                    </Tooltip>    
+                    <Tooltip text='Ver pets' placement='bottom'>
+                        <Button style={css`margin-right: 0.5rem`} kind='normal' size='small'onClick={routePets}>
+                            <Icon icon='petFilled'/>
+                        </Button>
+                    </Tooltip>
+                    <Tooltip text='Adicionar um novo pet' placement='bottom'>
+                        <Button style={css`margin-right: 0.5rem`} kind='normal' size='small' onClick={routeNewPet}>
+                            <Icon icon='plus'/>
+                        </Button>
+                    </Tooltip>
+                    <Tooltip text='Adicionar uma novo valor a pagar' placement='bottom'>
+                        <Button kind='normal' size='small' onClick={routeAddDebt}>
+                            <MdAttachMoney size={24}/>
+                        </Button>
+                    </Tooltip>
+                </TableCell>
+            </TableRow>
     )
 
 }

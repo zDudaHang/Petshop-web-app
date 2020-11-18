@@ -1,7 +1,7 @@
 INSERT INTO CUSTOMER (name, birth_date, debt)
 VALUES
 ('Maria', '1999-01-22', 1000),
-('Marcos', '2010-01-30', 500),
+('Marcos', '2010-01-30', 5000),
 ('João', '2005-01-30', 0);
 
 INSERT INTO USERS (username, password, is_admin, is_vet)
