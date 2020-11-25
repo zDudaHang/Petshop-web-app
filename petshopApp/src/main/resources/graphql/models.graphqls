@@ -41,7 +41,7 @@ type Mutation {
     deletePet(id: Int!) : Boolean
 
     #    USER
-    newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!, name: String!, salary: Float!): User
+    newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!, name: String!, salary: Int!): User
 
     #    APPOINTMENT
     newAppointment(userId: Int!, petId: Int!, date: String!, time: String!): Appointment
@@ -71,7 +71,7 @@ type User {
     isAdmin: Boolean!
     isVet: Boolean!
     name: String!
-    salary: Float!
+    salary: Int!
 }
 
 type Appointment {

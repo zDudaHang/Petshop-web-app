@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 //  QUERIES:
 import { CUSTOMERS_BY_NAME_LIKE} from '../graphql/queries';
 import { CustomersByNameLikeResult } from '../types/Customer';
-import { CustomerView } from './Customer/CustomerView';
+import { TableCustomerView } from './Customer/TableCustomerView';
 
 import { VFlow, TextField, HFlow, Table, TableHead, TableHeader, TableRow, TableBody } from 'bold-ui';
 import AuthContext from '../AuthContext';
@@ -52,7 +52,7 @@ export function SearchCustomerView() {
                         <TableBody>
                             {customers?.customersByNameLike.map( (c) => {
                                 return (
-                                    <CustomerView key={c.id} customer={c}/>
+                                    <TableCustomerView key={c.id} customer={c}/>
                                 )
                             }) }
                         </TableBody>

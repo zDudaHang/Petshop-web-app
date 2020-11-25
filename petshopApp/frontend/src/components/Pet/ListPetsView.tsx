@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { CUSTOMER, CUSTOMER_PETS } from "../../graphql/queries";
 import { CustomerResult } from "../../types/Customer";
 import { Heading, HFlow, Table, TableBody, TableHead, TableHeader, TableRow, VFlow } from "bold-ui";
-import { PetView } from "./PetView";
+import { TablePetView } from "./TablePetView";
 import { css } from "@emotion/core";
 import { ErrorView } from "../Infos/ErrorView";
 
@@ -42,7 +42,7 @@ export function ListPetsView() {
                             <TableBody>
                                 {data.customerPets.map( (p) => {
                                     return (
-                                        <PetView key={p.id} pet={p}/>
+                                        <TablePetView key={p.id} pet={p}/>
                                     )
                                 }) }
                             </TableBody>

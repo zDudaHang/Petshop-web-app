@@ -1,21 +1,25 @@
 import React from "react"
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { css } from "@emotion/core";
-import { Button, Cell, Grid, Heading, HFlow, VFlow } from "bold-ui";
+import { Alert, Button, Cell, Grid, Heading, HFlow, VFlow } from "bold-ui";
 import { Field, Form, FormRenderProps } from "react-final-form";
 import { PETS, VETS } from "../../../graphql/queries";
 import { PetsResult } from "../../../types/Pet";
 import { VetsResult } from "../../../types/User";
-import { isValidHour } from "../../../util/util";
-import { DatePickerAdapter, SelectAdapter, TimeFieldAdapter } from "../../Adapters";
+import { generateValidHours } from "../../../util/util";
+import { DatePickerAdapter, SelectAdapter } from "../../Adapters";
 import { LoadingView } from "../../Infos/LoadingView";
+import { CreateAppointmentResult } from "../../../types/Appointment";
+import { ADD_APPOINTMENT } from "../../../graphql/mutations";
 
 export function AddApointmentView() {
 
     const { loading:loadingVets, data:vets } = useQuery<VetsResult>(VETS);
 
     const { loading:loadingPets, data:pets } = useQuery<PetsResult>(PETS);
-    
+
+    const [newAppointment, {data:appointment}] = useMutation<CreateAppointmentResult>(ADD_APPOINTMENT);
+
     if (loadingVets) {
         return <LoadingView msg="Carregando os veterinários..."/>
     }
@@ -24,10 +28,13 @@ export function AddApointmentView() {
         return <LoadingView msg="Carregando os pets..."/>
     }
 
-    function handleSubmit(value: any) {
-        console.log(value.date)
-        console.log(value.time)
-        console.log(isValidHour(value.time))
+    function handleSubmit({date, time, vet, pet}: any) {
+        newAppointment({variables: {
+            userId: vet.id,
+            petId: pet.id,
+            date: date.toLocaleDateString('br'),
+            time: time
+        }})
     }
 
     function itemToString(item: any) {
@@ -40,6 +47,11 @@ export function AddApointmentView() {
 
         return (
             <VFlow vSpacing={1}>
+                {appointment?.newAppointment &&
+                    <Alert type='success'>
+                        Consulta adicionada com sucesso !
+                    </Alert>
+                }
                 <Heading level={1}>
                     Adicionando uma nova consulta
                 </Heading>
@@ -56,11 +68,12 @@ export function AddApointmentView() {
                         </Cell>
                         <Cell xs={6}>
                             <Field
-                                component={TimeFieldAdapter}
+                                component={SelectAdapter}
                                 name="time"
                                 label="Horário da consulta"
+                                items={generateValidHours()}
+                                itemsToString={(item: string) => item}
                                 required
-                                error={errors.time}
                             />
                         </Cell>
                         <Cell xs={6}>
@@ -105,13 +118,9 @@ export function AddApointmentView() {
                 onSubmit={handleSubmit}
                 render={renderForm}
                 validate={values => {
-                    const errors: {date: String | undefined, time: String | undefined} = {date: undefined, time: undefined}
+                    const errors: {date: String | undefined} = {date: undefined}
                     if (values.date < new Date(new Date().toDateString())) {
                         errors.date = 'A data precisa ser a partir de hoje'
-                    }
-                    if (!isValidHour(values.time)) {
-                        console.log('Não é uma hora válida :(')
-                        errors.time = 'Escolha um horário válido'
                     }
                     return errors;
                 }}

@@ -33,6 +33,6 @@ data class User(
         var name: String,
 
         @Column
-        var salary: Float
+        var salary: Int
 
 )

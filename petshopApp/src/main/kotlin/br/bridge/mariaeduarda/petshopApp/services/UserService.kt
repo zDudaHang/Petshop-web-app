@@ -27,7 +27,7 @@ class UserService(@Autowired val repo: UserRepository) {
         return u.get()
     }
 
-    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String, salary: Float): User {
+    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String, salary: Int): User {
         val u = User(username = username, password = password, isAdmin = isAdmin, isVet = isVet, name = name, salary = salary)
         repo.save(u)
         return u

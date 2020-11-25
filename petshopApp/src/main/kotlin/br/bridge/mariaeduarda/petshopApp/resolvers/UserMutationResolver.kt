@@ -12,7 +12,7 @@ class UserMutationResolver(
     @Autowired val service: UserService
     ) : GraphQLMutationResolver
 {
-    fun newUser(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String, salary: Float): User {
+    fun newUser(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String, salary: Int): User {
         return service.save(username = username, password = password, isAdmin = isAdmin, isVet = isVet, name = name, salary = salary)
     }
 }

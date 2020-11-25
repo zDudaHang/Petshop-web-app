@@ -82,6 +82,8 @@ query user($id: Int!) {
     password
     isAdmin
     isVet
+    name
+    salary
   }
 }
 `;
@@ -94,6 +96,8 @@ export const USER_AUTH = gql`
       password
       isAdmin
       isVet
+      name
+      salary
     }
   }
 `;

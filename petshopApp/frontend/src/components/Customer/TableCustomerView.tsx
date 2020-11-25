@@ -11,11 +11,11 @@ import AuthContext from '../../AuthContext';
 import { MdAttachMoney } from 'react-icons/md';
 import { css } from '@emotion/core';
 
-export interface CustomerViewProps {
+export interface TableCustomerViewProps {
     customer: Customer;
 }
 
-export function CustomerView(props: CustomerViewProps) {
+export function TableCustomerView(props: TableCustomerViewProps) {
 
     const {user} = useContext(AuthContext);
 

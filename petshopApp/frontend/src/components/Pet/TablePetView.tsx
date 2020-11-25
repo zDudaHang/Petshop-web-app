@@ -7,11 +7,11 @@ import { formatDate } from "../../util/util";
 import { Button, Icon, TableCell, TableRow, Tooltip} from 'bold-ui';
 import { css } from '@emotion/core';
 
-export interface PetViewProps {
+export interface TablePetViewProps {
     pet: Pet;
 }
 
-export function PetView(props: PetViewProps) {
+export function TablePetView(props: TablePetViewProps) {
 
     const history = useHistory();
 

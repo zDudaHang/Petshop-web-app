@@ -17,6 +17,7 @@ class Formatter
 
         @JvmStatic
         fun formatTime(time: String): LocalTime {
+            println("formatTime: " + timeFormatter.parse(time))
             return LocalTime.from(timeFormatter.parse(time))
         }
     }

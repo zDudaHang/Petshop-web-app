@@ -53,13 +53,15 @@ export const DELETE_PET = gql`
 `;
 
 export const CREATE_USER = gql`
-    mutation CreateUser($username: String!, $password: String!, $isAdmin: Boolean!, $isVet: Boolean!) {
-        newUser(username: $username, password: $password, isAdmin: $isAdmin, isVet: $isVet ) {
+    mutation CreateUser($username: String!, $password: String!, $isAdmin: Boolean!, $isVet: Boolean!, $name: String!, $salary: Int!) {
+        newUser(username: $username, password: $password, isAdmin: $isAdmin, isVet: $isVet, name: $name, salary: $salary) {
             id
             username
             password
             isAdmin
             isVet
+            name
+            salary
         }
     }
 `;
@@ -71,6 +73,14 @@ mutation AddDebt($id: Int!, $value: String!) {
         name
         birthDate
         debt
+    }
+}
+`;
+
+export const ADD_APPOINTMENT = gql`
+mutation newAppointment($userId: Int!, $petId: Int!, $date: String!, $time: String!) {
+    newAppointment(userId: $userId, petId: $petId, date: $date, time: $time) {
+        id
     }
 }
 `;

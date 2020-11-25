@@ -41,11 +41,7 @@ export function CreatePetView() {
     }
 
     function itemToString(item: any) {
-        if (item) {
-            return `${item.name}`
-        } else {
-            return ""
-        }
+        return item ? `${item.name}` : ""
     }
 
     const renderForm = (props: FormRenderProps) => {

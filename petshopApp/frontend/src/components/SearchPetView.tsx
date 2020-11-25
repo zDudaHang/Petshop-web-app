@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 //  QUERIES:
 import { PETS_BY_NAME_LIKE } from '../graphql/queries';
 import { PetsByNameLikeResult } from '../types/Pet';
-import { PetView } from './Pet/PetView';
+import { TablePetView } from './Pet/TablePetView';
 
 import { VFlow, TextField, HFlow, Table, TableHead, TableHeader, TableRow, TableBody } from 'bold-ui';
 import { css } from '@emotion/core';
@@ -49,7 +49,7 @@ export function SearchPetView() {
                             <TableBody>
                                 {pets?.petsByNameLike.map((p) => {
                                     return (
-                                        <PetView key={p.id} pet={p}/>
+                                        <TablePetView key={p.id} pet={p}/>
                                     )
                                 })}
                             </TableBody>
