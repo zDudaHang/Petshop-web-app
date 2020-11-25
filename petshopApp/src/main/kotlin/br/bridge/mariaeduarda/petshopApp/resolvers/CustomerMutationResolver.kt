@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class CustomerMutationResolver(@Autowired val service: CustomerService) : GraphQLMutationResolver {
+class CustomerMutationResolver(
+    @Autowired val service: CustomerService
+    ) : GraphQLMutationResolver
+{
     fun newCustomer(name: String, birthDate: String): Customer {
         return service.save(name, birthDate)
     }

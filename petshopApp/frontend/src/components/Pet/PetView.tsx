@@ -6,7 +6,6 @@ import { Pet } from '../../types/Pet';
 import { formatDate } from "../../util/util";
 import { Button, Icon, TableCell, TableRow, Tooltip} from 'bold-ui';
 import { css } from '@emotion/core';
-import { SpeciesView } from './SpeciesView';
 
 export interface PetViewProps {
     pet: Pet;
@@ -28,7 +27,7 @@ export function PetView(props: PetViewProps) {
     }
 
     return(
-        <TableRow key={props.pet.id}>
+        <TableRow>
                 <TableCell>
                     {props.pet.id}
                 </TableCell>
@@ -37,9 +36,6 @@ export function PetView(props: PetViewProps) {
                 </TableCell>
                 <TableCell>
                     {formatDate(props.pet.birthDate)}
-                </TableCell>
-                <TableCell>
-                    <SpeciesView specie=""/>
                 </TableCell>
                 <TableCell>
                   <Tooltip text='Alterar' placement='bottom'>

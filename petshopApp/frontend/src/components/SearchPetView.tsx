@@ -42,7 +42,7 @@ export function SearchPetView() {
                                     <TableHeader>ID</TableHeader>
                                     <TableHeader>Nome</TableHeader>
                                     <TableHeader>Data de nascimento</TableHeader>
-                                    <TableHeader>Espécie</TableHeader>
+                                    {/* <TableHeader>Espécie</TableHeader> */}
                                     <TableHeader></TableHeader>
                                 </TableRow>
                             </TableHead>

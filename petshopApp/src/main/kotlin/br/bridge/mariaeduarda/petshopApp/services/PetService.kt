@@ -2,8 +2,10 @@ package br.bridge.mariaeduarda.petshopApp.services
 
 import br.bridge.mariaeduarda.petshopApp.entities.Customer
 import br.bridge.mariaeduarda.petshopApp.entities.Pet
+import br.bridge.mariaeduarda.petshopApp.entities.Species
 import br.bridge.mariaeduarda.petshopApp.repositories.PetRepository
-import br.bridge.mariaeduarda.petshopApp.util.DateFormatter
+import br.bridge.mariaeduarda.petshopApp.repositories.SpeciesRepository
+import br.bridge.mariaeduarda.petshopApp.util.Formatter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
@@ -11,13 +13,15 @@ import java.util.*
 @Service
 class PetService(
         @Autowired val repo: PetRepository,
-        @Autowired val customerService: CustomerService
+        @Autowired val customerService: CustomerService,
+        @Autowired val speciesRepo: SpeciesRepository
 ) {
 
-    fun save(name: String, birthDate: String, ownerId: Int): Pet? {
+    fun save(name: String, birthDate: String, ownerId: Int, speciesId: Int): Pet? {
         val owner: Customer? = customerService.findById(ownerId.toLong())
+        val species: Optional<Species> = speciesRepo.findById(speciesId.toLong())
         if (owner != null) {
-            val p = Pet(name = name, birthDate = DateFormatter.formatDate(birthDate), owner = owner)
+            val p = Pet(name = name, birthDate = Formatter.formatDate(birthDate), owner = owner, species = species.get())
             repo.save(p)
             return p
         }

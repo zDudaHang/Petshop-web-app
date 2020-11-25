@@ -6,24 +6,46 @@ import { CreatePetResult } from "../../types/Pet";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { CustomerResult } from "../../types/Customer";
-import { CUSTOMER } from "../../graphql/queries";
+import { CUSTOMER, SPECIES } from "../../graphql/queries";
 import { Field, Form, FormRenderProps } from "react-final-form";
 import { Alert, Button, Cell, Grid, Heading, HFlow, VFlow } from "bold-ui";
-import { MaskedTextFieldAdapter, TextFieldAdapter } from '../Adapters';
-import { ErrorView } from '../ErrorView';
+import { MaskedTextFieldAdapter, SelectAdapter, TextFieldAdapter } from '../Adapters';
+import { ErrorView } from '../Infos/ErrorView';
+import { SpeciesResult } from '../../types/Species';
+import { LoadingView } from '../Infos/LoadingView';
 
 export function CreatePetView() {
 
     const {ownerId} = useParams<{ownerId: string}>();
 
-    const {loading, data: owner} = useQuery<CustomerResult>(CUSTOMER, {
+    const {loading:loadingOwner, data:owner} = useQuery<CustomerResult>(CUSTOMER, {
         variables: { id: ownerId }
     })
 
+    const {loading:loadingSpecies, data:species} = useQuery<SpeciesResult>(SPECIES);
+
     const [newPet, {data:pet}] = useMutation<CreatePetResult>(CREATE_PET);
 
-    function handleSubmit({name, birthdate}: any) {
-        newPet({variables: {name: name, birthDate: birthdate, ownerId: ownerId}})
+    if (loadingOwner) {
+        return <LoadingView msg="Carregando os dados do dono..."/>
+    }
+
+    if (loadingSpecies) {
+        return <LoadingView msg="Carregando as espécies..."/>
+    }
+
+    function handleSubmit({name, birthdate, species}: any) {
+        if (species) {
+            newPet({variables: {name: name, birthDate: birthdate, ownerId: ownerId, speciesId: species.id}})
+        }
+    }
+
+    function itemToString(item: any) {
+        if (item) {
+            return `${item.name}`
+        } else {
+            return ""
+        }
     }
 
     const renderForm = (props: FormRenderProps) => {
@@ -59,6 +81,15 @@ export function CreatePetView() {
                                 placeholder="dd/mm/aaaa"
                             />
                         </Cell>
+                        <Cell xs={6}>
+                            <Field
+                                component={SelectAdapter}
+                                name="species"
+                                label="Escolha uma espécie"
+                                items={species?.allSpecies}
+                                itemToString={itemToString}
+                            />
+                        </Cell>
                         <Cell xs={12}>
                             <HFlow justifyContent="flex-start">
                                 <Button type="reset" kind="normal" size="small" onClick={props.form.reset}>
@@ -74,26 +105,16 @@ export function CreatePetView() {
             </VFlow>
         )
     }
-
-    if (loading) {
-        return (
-            <VFlow>
-                <Heading style={{textAlign: 'center'}} color="normal" level={1}>
-                    Carregando...
-                </Heading>
-            </VFlow>
+        
+    return (        
+        <HFlow style={css`margin: 1rem`} justifyContent="center">
+            {owner  ? 
+                <Form
+                    onSubmit={handleSubmit}
+                    render={renderForm}/>
+            :
+                <ErrorView/>
+            }
+        </HFlow>
         );
-    } else {
-        return (
-            <HFlow style={css`margin: 1rem`} justifyContent="center">
-                {owner  ? 
-                    <Form
-                        onSubmit={handleSubmit}
-                        render={renderForm}/>
-                :
-                    <ErrorView/>
-                }
-            </HFlow>
-        );
-    }
 }

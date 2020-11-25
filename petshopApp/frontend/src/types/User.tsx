@@ -5,6 +5,8 @@ export interface User {
     password: string;
     isAdmin: boolean;
     isVet: boolean;
+    name: string;
+    salary: number;
 }
 
 export interface UserWithoutPassword {
@@ -12,6 +14,8 @@ export interface UserWithoutPassword {
     username: string;
     isAdmin: boolean;
     isVet: boolean;
+    name: string;
+    salary: number;
 }
 
 // TYPE FOR MUTATION: CREATE_USER
@@ -22,3 +26,12 @@ export interface CreateUserResult {
 export interface UsersResult {
     users: UserWithoutPassword[]
 }
+
+export interface UserResult {
+    user: UserWithoutPassword;
+}
+
+export interface VetsResult {
+    vets: UserWithoutPassword[];
+}
+

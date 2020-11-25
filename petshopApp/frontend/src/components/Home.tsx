@@ -16,13 +16,14 @@ import { Navbar } from "./Navbar/Navbar";
 import { UserNavbarView } from "./Navbar/UserNavbarView";
 import { AdminNavbar } from "./Navbar/AdminNavbar";
 import { VetNavbar } from "./Navbar/VetNavbar";
-import { EmployeeNavbar } from "./Navbar/EmployeeNavbar";
 import { SearchPetView } from "./SearchPetView";
 import { CreateUserView } from "./User/CreateUserView";
 import PrivateRoute from "./PrivateRoute";
 import { AddDebtView } from "./Customer/AddDebtView";
-import { AboutView } from "./AboutView";
+import { AboutView } from "./Infos/AboutView";
 import { ListUserView } from "./User/ListUserView";
+import { AppointmentsView } from "./User/Vet/AppointmentsView";
+import { AddApointmentView } from "./User/Vet/AddApointmentView";
 
 export function Home() {
 
@@ -32,21 +33,28 @@ export function Home() {
                   <UserNavbarView/>
                   <AdminNavbar/>
                   <VetNavbar/>
-                  <EmployeeNavbar/>
             </Navbar>
             <Router>
               <Switch>
                 <Route exact path="/" component={SearchCustomerView}/>
+
                 <Route path="/searchCustomer" component={SearchCustomerView}/>
                 <Route path="/searchPet" component={SearchPetView}/>
                 <PrivateRoute path="/users" component={ListUserView}/>
+
                 <Route path="/createPet/:ownerId/" component={CreatePetView}/>
                 <Route path="/createCustomer" component={CreateCustomerView}/>
                 <PrivateRoute path="/createUser" component={CreateUserView}/>
+                <Route path="/addAppointment" component={AddApointmentView}/>
+
                 <Route path="/addDebt/:customerId" component={AddDebtView}/>
+
                 <Route path="/updatePet/:petId" component={UpdatePetView}/>
                 <Route path="/updateCustomer/:customerId" component={UpdateCustomerView}/>
+
                 <Route path="/pets/:ownerId/" component={ListPetsView}/>
+                <Route path="/calendar/:userId" component={AppointmentsView}/>
+                
                 <Route path="/about" component={AboutView}/>
               </Switch>
             </Router>

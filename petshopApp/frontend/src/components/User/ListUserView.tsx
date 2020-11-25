@@ -3,9 +3,9 @@ import { useQuery } from '@apollo/client';
 import { USERS } from "../../graphql/queries";
 import { Heading, HFlow, Table, TableBody, TableHead, TableHeader, TableRow, VFlow } from "bold-ui";
 import { css } from "@emotion/core";
-import { UserView } from "./UserView";
+import { TableUserView } from "./TableUserView";
 import { UsersResult } from "../../types/User";
-import { ErrorView } from "../ErrorView";
+import { ErrorView } from "../Infos/ErrorView";
 
 export function ListUserView() {
 
@@ -24,14 +24,15 @@ export function ListUserView() {
                                 <TableRow>
                                     <TableHeader>ID</TableHeader>
                                     <TableHeader>Usuário</TableHeader>
-                                    {/* <TableHeader>Salário</TableHeader> */}
+                                    <TableHeader>Nome</TableHeader>
+                                    <TableHeader>Salário</TableHeader>
                                     <TableHeader>Função</TableHeader>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {data.users.map( (u) => {
                                     return (
-                                        <UserView key={u.id} user={u}/>
+                                        <TableUserView key={u.id} user={u}/>
                                     )
                                 }) }
                             </TableBody>

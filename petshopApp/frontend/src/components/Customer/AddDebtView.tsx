@@ -8,7 +8,7 @@ import { ADD_DEBT } from "../../graphql/mutations";
 import { CUSTOMER } from "../../graphql/queries";
 import { CustomerAddDebtResult, CustomerResult } from "../../types/Customer";
 import { TextFieldAdapter } from "../Adapters";
-import { ErrorView } from "../ErrorView";
+import { ErrorView } from "../Infos/ErrorView";
 
 export function AddDebtView() {
 

@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class PetMutationResolver(@Autowired val service: PetService) : GraphQLMutationResolver {
-    fun newPet(name: String, birthDate: String, ownerId: Int): Pet? {
-        return service.save(name, birthDate, ownerId)
+class PetMutationResolver(
+    @Autowired val service: PetService
+    ) : GraphQLMutationResolver
+{
+    fun newPet(name: String, birthDate: String, ownerId: Int, speciesId: Int): Pet? {
+        return service.save(name, birthDate, ownerId, speciesId)
     }
 
     fun updatePet(id: Int, newName: String): Pet? {

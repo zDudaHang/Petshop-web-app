@@ -1,20 +1,33 @@
 import React from "react"
+import { Species } from "../../types/Species";
 import { Emoji } from "../Emoji";
 import { ReactComponent as BunnyLogo } from "./SpeciesIcons/001-rabbit.svg"
+
+
+export enum SpeciesEnum {
+    DOG, 
+    CAT, 
+    RABBIT, 
+    PIG, 
+    RAT, 
+    HAMSTER, 
+    HEDGEHOG
+}
+
 export interface SpeciesViewProps {
-    specie: String
+    species: Species
 }
 
 
 export function SpeciesView(props: SpeciesViewProps) {
-    switch (props.specie) {
-        case "Dog": return <Emoji symbol="0x1F436" tooltipText="Cachorro"/>;
-        case "Cat": return <Emoji symbol="0x1F436"/>;
-        case "Rabbit": return <Emoji symbol="0x1F430"/>;
-        case "Pig": return <Emoji symbol="0x1F437"/>;
-        case "Rat": return <Emoji symbol="0x1F42D"/>;
-        case "Hamster": return <Emoji symbol="0x1F439"/>;
-        case "Hedgehog": return <Emoji symbol="0x1F994"/>;
+    switch (props.species.id) {
+        case SpeciesEnum.DOG: return <Emoji symbol="0x1F436" tooltipText="Cachorro"/>;
+        case SpeciesEnum.CAT: return <Emoji symbol="0x1F436"/>;
+        case SpeciesEnum.RABBIT: return <Emoji symbol="0x1F430"/>;
+        case SpeciesEnum.PIG: return <Emoji symbol="0x1F437"/>;
+        case SpeciesEnum.RAT: return <Emoji symbol="0x1F42D"/>;
+        case SpeciesEnum.HAMSTER: return <Emoji symbol="0x1F439"/>;
+        case SpeciesEnum.HEDGEHOG: return <Emoji symbol="0x1F994"/>;
         default: return <BunnyLogo width={50} height={50} fill="#484a4d"/>;
     }
 }

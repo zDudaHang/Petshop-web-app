@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class PetResolver(@Autowired val service: PetService) : GraphQLQueryResolver {
+class PetResolver(
+    @Autowired val service: PetService
+    ) : GraphQLQueryResolver
 
+{
     fun pets(): List<Pet>? {
         return service.findAll()
     }

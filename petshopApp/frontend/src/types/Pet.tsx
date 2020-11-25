@@ -30,3 +30,7 @@ export interface UpdatePetResult {
 export interface CreatePetResult {
     newPet: Pet;
 }
+
+export interface PetsResult {
+    pets: Pet[];
+}

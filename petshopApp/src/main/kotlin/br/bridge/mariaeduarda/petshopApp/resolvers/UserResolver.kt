@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class UserResolver(@Autowired val service: UserService) : GraphQLQueryResolver {
+class UserResolver(
+    @Autowired val service: UserService
+    ) : GraphQLQueryResolver
+{
     fun users(): List<User>? {
         return service.findAll()
     }
@@ -18,5 +21,9 @@ class UserResolver(@Autowired val service: UserService) : GraphQLQueryResolver {
 
     fun auth(username: String, password: String): User? {
         return service.auth(username, password)
+    }
+
+    fun vets() : List<User>? {
+        return service.findByIsVetTrue()
     }
 }

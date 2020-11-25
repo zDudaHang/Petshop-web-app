@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component
 
 @Component
 class CustomerResolver(
-        @Autowired val service: CustomerService,
-        @Autowired val petService: PetService)
-    : GraphQLQueryResolver {
-
+    @Autowired val service: CustomerService,
+    @Autowired val petService: PetService
+    ) : GraphQLQueryResolver
+{
     fun customers(): List<Customer>? {
         return service.findAll()
     }

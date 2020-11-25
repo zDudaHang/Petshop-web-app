@@ -27,16 +27,11 @@ export const DELETE_CUSTOMER = gql`
 `;
 
 export const CREATE_PET = gql`
-  mutation CreatePet($name: String!, $birthDate: String!, $ownerId: Int!) {
-      newPet(name: $name, birthDate: $birthDate, ownerId: $ownerId) {
+  mutation CreatePet($name: String!, $birthDate: String!, $ownerId: Int!, $speciesId: Int!) {
+      newPet(name: $name, birthDate: $birthDate, ownerId: $ownerId, speciesId: $speciesId) {
           id
           name
           birthDate
-          owner {
-              id
-              name
-              birthDate
-          }
       }
   }
 `;

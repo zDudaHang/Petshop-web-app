@@ -8,6 +8,7 @@ import java.util.*
 
 @Service
 class UserService(@Autowired val repo: UserRepository) {
+
     fun auth(username: String, password: String): User? {
         val user: User? = repo.findByUsername(username)
         if (user != null && user.password == password) {
@@ -26,9 +27,13 @@ class UserService(@Autowired val repo: UserRepository) {
         return u.get()
     }
 
-    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean): User {
-        val u = User(username = username, password = password, isAdmin = isAdmin, isVet = isVet)
+    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String, salary: Float): User {
+        val u = User(username = username, password = password, isAdmin = isAdmin, isVet = isVet, name = name, salary = salary)
         repo.save(u)
         return u
+    }
+
+    fun findByIsVetTrue() : List<User>? {
+        return repo.findByIsVetTrue()
     }
 }

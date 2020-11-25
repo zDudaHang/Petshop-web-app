@@ -7,31 +7,34 @@ import "./styles/App.css";
 function App() {
   const users = [
     {
-      id: 0,
-      username: "Admin",
-      password: "admin123",
+      id: 3,
+      username: "ana.m.h",
+      password: "ana123",
       isAdmin: true,
       isVet: false,
+      name: "Ana Maria Hillesheim"
     },
 
     {
       id: 1,
-      username: "Employee",
-      password: "employee123",
+      username: "bruna.ss",
+      password: "bruna123",
       isAdmin: false,
       isVet: false,
+      name: "Bruna da Silva Santos"
     },
 
     {
       id: 2,
-      username: "Vet",
-      password: "vet123",
+      username: "luiza.m.lopez",
+      password: "luiza123",
       isAdmin: false,
       isVet: true,
+      name: "Luiza Mello Lopez"
     }
   ]
 
-  let actualUser = users[0]
+  let actualUser = users[2]
 
   const value = {
     user: actualUser

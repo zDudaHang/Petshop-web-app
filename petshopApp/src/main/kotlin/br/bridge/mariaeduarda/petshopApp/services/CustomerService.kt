@@ -2,13 +2,15 @@ package br.bridge.mariaeduarda.petshopApp.services
 
 import br.bridge.mariaeduarda.petshopApp.entities.Customer
 import br.bridge.mariaeduarda.petshopApp.repositories.CustomerRepository
-import br.bridge.mariaeduarda.petshopApp.util.DateFormatter
+import br.bridge.mariaeduarda.petshopApp.util.Formatter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class CustomerService(@Autowired val repo: CustomerRepository) {
+class CustomerService(
+    @Autowired val repo: CustomerRepository
+    ) {
 
     fun addDebt(id: Int, value: Float): Customer? {
         val c: Customer? = findById(id.toLong())
@@ -33,7 +35,7 @@ class CustomerService(@Autowired val repo: CustomerRepository) {
     }
 
     fun save(name: String, birthDate: String): Customer {
-        val c = Customer(name = name, birthDate = DateFormatter.formatDate(birthDate))
+        val c = Customer(name = name, birthDate = Formatter.formatDate(birthDate))
         repo.save(c)
         return c
     }

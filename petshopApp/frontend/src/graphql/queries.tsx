@@ -38,12 +38,6 @@ export const PETS = gql`
       id
       name
       birthDate
-      owner {
-          id
-          name
-          birthDate
-          debt
-      }
     }
   }
 `;
@@ -112,9 +106,45 @@ query users {
     username
     isAdmin
     isVet
+    name
+    salary
+  }
+}
+`;
+
+export const DAY_APPOINTMENT = gql`
+query dayAppointments($userId: Int!, $date: String!) {
+  dayAppointments(userId: $userId, date: $date) {
+    id
+    time
+    date
+    pet {
+      id
+      name
+    }
+    user {
+      id
+      username
+    }
   }
 }
 `;
 
 
+export const VETS = gql`
+query vets {
+  vets {
+    id
+    name
+  }
+}
+`;
 
+export const SPECIES = gql`
+query allSpecies {
+  allSpecies {
+    id
+    name
+  }
+}
+`;

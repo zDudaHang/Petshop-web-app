@@ -9,7 +9,7 @@ import { Alert, Button, Cell, Grid, Heading, HFlow, VFlow } from "bold-ui";
 import { Field, Form, FormRenderProps } from "react-final-form";
 import { css } from "@emotion/core";
 import { MaskedTextFieldAdapter, TextFieldAdapter } from "../Adapters";
-import { ErrorView } from "../ErrorView";
+import { ErrorView } from "../Infos/ErrorView";
 
 export function UpdateCustomerView() {
 

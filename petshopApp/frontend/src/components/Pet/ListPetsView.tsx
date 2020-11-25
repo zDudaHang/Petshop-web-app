@@ -7,7 +7,7 @@ import { CustomerResult } from "../../types/Customer";
 import { Heading, HFlow, Table, TableBody, TableHead, TableHeader, TableRow, VFlow } from "bold-ui";
 import { PetView } from "./PetView";
 import { css } from "@emotion/core";
-import { ErrorView } from "../ErrorView";
+import { ErrorView } from "../Infos/ErrorView";
 
 export function ListPetsView() {
 
@@ -35,7 +35,7 @@ export function ListPetsView() {
                                     <TableHeader>ID</TableHeader>
                                     <TableHeader>Nome</TableHeader>
                                     <TableHeader>Data de nascimento</TableHeader>
-                                    <TableHeader>Espécie</TableHeader>
+                                    {/* <TableHeader>Espécie</TableHeader> */}
                                     <TableHeader></TableHeader>
                                 </TableRow>
                             </TableHead>

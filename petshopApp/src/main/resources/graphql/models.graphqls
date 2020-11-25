@@ -1,4 +1,5 @@
 type Query {
+
     customers: [Customer]
     customer(id: Int!): Customer
     customersByNameLike(name: String!): [Customer]
@@ -12,21 +13,38 @@ type Query {
     users: [User]
     auth(username: String!, password: String!): User
     user(id: Int!): User
+    vets: [User]
+
+    appointments: [Appointment]
+    appointment(id: Int!): Appointment
+
+#    Get appointments of a specific vet on specific date
+    dayAppointments(userId: Int!, date: String!): [Appointment]
+
+    allSpecies: [Species]
 }
 
 type Mutation {
+
+    #    CUSTOMER
     newCustomer(name: String!, birthDate: String!): Customer!
-    updateCustomer(id: Int!, newName: String!): Customer!
+    updateCustomer(id: Int!, newName: String!): Customer
     deleteCustomer(id: Int!): Boolean
 
+    #    CUSTOMER DEBT
     addDebt(id: Int!, value: String!): Customer
     removeDebt(id: Int!, value: Float!): Customer
 
-    newPet(name: String!, birthDate: String!, ownerId: Int!): Pet!
+    #    PET
+    newPet(name: String!, birthDate: String!, ownerId: Int!, speciesId: Int!): Pet
     updatePet(id: Int!, newName: String!): Pet!
     deletePet(id: Int!) : Boolean
 
-    newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!): User!
+    #    USER
+    newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!, name: String!, salary: Float!): User
+
+    #    APPOINTMENT
+    newAppointment(userId: Int!, petId: Int!, date: String!, time: String!): Appointment
 
 }
 
@@ -43,6 +61,7 @@ type Pet {
     name: String!
     birthDate: String!
     owner: Customer!
+    species: Species!
 }
 
 type User {
@@ -51,4 +70,19 @@ type User {
     password: String!
     isAdmin: Boolean!
     isVet: Boolean!
+    name: String!
+    salary: Float!
+}
+
+type Appointment {
+    id: Int!
+    user: User!,
+    pet: Pet!,
+    date: String!,
+    time: String!
+}
+
+type Species {
+    id: Int!,
+    name: String!
 }
