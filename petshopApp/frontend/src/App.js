@@ -1,6 +1,8 @@
 import React from "react";
 import { Home } from "./components/Home";
-import { AuthContext } from "./AuthContext"
+import { AuthContext } from "./AuthContext";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./config/client";
 
 import "./styles/App.css";
 
@@ -12,7 +14,7 @@ function App() {
       password: "ana123",
       isAdmin: true,
       isVet: false,
-      name: "Ana Maria Hillesheim"
+      name: "Ana Maria Hillesheim",
     },
 
     {
@@ -21,7 +23,7 @@ function App() {
       password: "bruna123",
       isAdmin: false,
       isVet: false,
-      name: "Bruna da Silva Santos"
+      name: "Bruna da Silva Santos",
     },
 
     {
@@ -30,21 +32,23 @@ function App() {
       password: "luiza123",
       isAdmin: false,
       isVet: true,
-      name: "Luiza Mello Lopez"
-    }
-  ]
+      name: "Luiza Mello Lopez",
+    },
+  ];
 
-  let actualUser = users[2]
+  let actualUser = users[2];
 
   const value = {
-    user: actualUser
-  }
+    user: actualUser,
+  };
 
   return (
     <div className="App">
-      <AuthContext.Provider value={ value }>
-        <Home/>
-      </AuthContext.Provider>
+      <ApolloProvider client={client}>
+        <AuthContext.Provider value={value}>
+          <Home />
+        </AuthContext.Provider>
+      </ApolloProvider>
     </div>
   );
 }
