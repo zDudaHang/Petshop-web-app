@@ -8,4 +8,4 @@ log/
 target/
 
 # Front
-frontend/node_modules/
+**/node_modules
