@@ -6,7 +6,7 @@ services:
     image: postgres:12.4-alpine
     ports:
       #     Porta da maquina : porta do container
-      - "5532:5432"
+      - "5432:5432"
     environment:
       POSTGRES_DB: petshop-database
       POSTGRES_USER: postgres

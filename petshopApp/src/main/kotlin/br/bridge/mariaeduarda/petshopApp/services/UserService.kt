@@ -1,39 +1,41 @@
 package br.bridge.mariaeduarda.petshopApp.services
 
 import br.bridge.mariaeduarda.petshopApp.entities.User
+import br.bridge.mariaeduarda.petshopApp.impl.UserDetailsImpl
 import br.bridge.mariaeduarda.petshopApp.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserService(@Autowired val repo: UserRepository) {
-
-    fun auth(username: String, password: String): User? {
-        val user: User? = repo.findByUsername(username)
-        if (user != null && user.password == password) {
-            return user
-        }
-
-        return null
-    }
+class UserService(@Autowired val repo: UserRepository, @Autowired val passwordEncoder: PasswordEncoder) : UserDetailsService {
 
     fun findAll(): List<User> {
         return repo.findAll()
     }
 
-    fun findById(id: Long): User? {
+    @Throws(UsernameNotFoundException::class)
+    fun findById(id: Long): User {
         val u: Optional<User> = repo.findById(id)
-        return u.get()
+        if (u.isPresent) return u.get()
+        throw UsernameNotFoundException("User not found")
     }
 
-    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String, salary: Int): User {
-        val u = User(username = username, password = password, isAdmin = isAdmin, isVet = isVet, name = name, salary = salary)
+    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String): User {
+        val u = User(username = username, password = passwordEncoder.encode(password), isAdmin = isAdmin, isVet = isVet, name = name)
         repo.save(u)
         return u
     }
 
-    fun findByIsVetTrue() : List<User>? {
-        return repo.findByIsVetTrue()
+    @Throws(UsernameNotFoundException::class)
+    override fun loadUserByUsername(username: String): UserDetails? {
+        val u: Optional<User> = repo.findByUsername(username)
+        if (u.isPresent) return UserDetailsImpl(u.get())
+        throw UsernameNotFoundException("User not found")
+
     }
 }

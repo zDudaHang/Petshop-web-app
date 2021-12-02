@@ -5,11 +5,12 @@ import br.bridge.mariaeduarda.petshopApp.entities.Pet
 import br.bridge.mariaeduarda.petshopApp.services.CustomerService
 import br.bridge.mariaeduarda.petshopApp.services.PetService
 import graphql.kickstart.tools.GraphQLQueryResolver
+import graphql.schema.DataFetchingEnvironment
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class CustomerResolver(
+class CustomerQueryResolver(
     @Autowired val service: CustomerService,
     @Autowired val petService: PetService
     ) : GraphQLQueryResolver
@@ -22,16 +23,12 @@ class CustomerResolver(
         return service.findById(id.toLong())
     }
 
-    fun customersByNameLike(name: String): List<Customer>? {
+    fun customersByNameLike(name: String, env: DataFetchingEnvironment): List<Customer>? {
         return service.findByNameLike(name)
     }
 
     fun customerPets(id: Int): List<Pet>? {
         return petService.findByOwnerId(id.toLong())
-    }
-
-    fun sumDebts(): Float {
-        return service.sumDebts()
     }
 
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class SpeciesResolver (
+class SpeciesQueryResolver (
     @Autowired val repo: SpeciesRepository
     ) : GraphQLQueryResolver
 {

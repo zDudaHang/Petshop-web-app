@@ -1,25 +1,15 @@
 type Query {
-
     customers: [Customer]
     customer(id: Int!): Customer
     customersByNameLike(name: String!): [Customer]
     customerPets(id: Int!): [Pet]
-    sumDebts: Float!
 
     pets: [Pet]
     pet(id: Int!): Pet
     petsByNameLike(name: String!): [Pet]
 
     users: [User]
-    auth(username: String!, password: String!): User
     user(id: Int!): User
-    vets: [User]
-
-    appointments: [Appointment]
-    appointment(id: Int!): Appointment
-
-#    Get appointments of a specific vet on specific date
-    dayAppointments(userId: Int!, date: String!): [Appointment]
 
     allSpecies: [Species]
 }
@@ -41,11 +31,15 @@ type Mutation {
     deletePet(id: Int!) : Boolean
 
     #    USER
-    newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!, name: String!, salary: Int!): User
+    newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!, name: String!): User
 
-    #    APPOINTMENT
-    newAppointment(userId: Int!, petId: Int!, date: String!, time: String!): Appointment
+    login(input: LoginInput!): SigninPayload
 
+}
+
+input LoginInput {
+    username: String!
+    password: String!
 }
 
 type Customer {
@@ -71,18 +65,15 @@ type User {
     isAdmin: Boolean!
     isVet: Boolean!
     name: String!
-    salary: Int!
 }
 
-type Appointment {
-    id: Int!
-    user: User!,
-    pet: Pet!,
-    date: String!,
-    time: String!
+type SigninPayload {
+    token: String
+    user: User
 }
 
 type Species {
     id: Int!,
     name: String!
 }
+
