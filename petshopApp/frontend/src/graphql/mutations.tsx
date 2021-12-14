@@ -53,15 +53,14 @@ export const DELETE_PET = gql`
 `;
 
 export const CREATE_USER = gql`
-    mutation CreateUser($username: String!, $password: String!, $isAdmin: Boolean!, $isVet: Boolean!, $name: String!, $salary: Int!) {
-        newUser(username: $username, password: $password, isAdmin: $isAdmin, isVet: $isVet, name: $name, salary: $salary) {
+    mutation CreateUser($username: String!, $password: String!, $isAdmin: Boolean!, $isVet: Boolean!, $name: String!) {
+        newUser(username: $username, password: $password, isAdmin: $isAdmin, isVet: $isVet, name: $name) {
             id
             username
             password
             isAdmin
             isVet
             name
-            salary
         }
     }
 `;

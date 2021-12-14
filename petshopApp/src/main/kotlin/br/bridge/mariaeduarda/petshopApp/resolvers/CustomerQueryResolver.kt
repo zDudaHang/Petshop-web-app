@@ -23,7 +23,7 @@ class CustomerQueryResolver(
         return service.findById(id.toLong())
     }
 
-    fun customersByNameLike(name: String, env: DataFetchingEnvironment): List<Customer>? {
+    fun customersByNameLike(name: String): List<Customer>? {
         return service.findByNameLike(name)
     }
 

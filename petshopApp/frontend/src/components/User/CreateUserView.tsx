@@ -13,14 +13,14 @@ export function CreateUserView() {
 
     const [hide, setHide] = useState(true)
 
-    function handleSubmit({username, password, userType, name, salary}: any) {
+    function handleSubmit({username, password, userType, name}: any) {
         newUser({variables: {
             username: username,
             password: password,
             isAdmin: (userType === "isAdmin" ? true : false),
             isVet: (userType === "isVet" ? true : false),
             name: name,
-            salary: parseInt(salary)
+            
         }})
     }
 
@@ -44,17 +44,6 @@ export function CreateUserView() {
                                 label="Nome"
                                 placeholder="Nome do funcionário"
                                 required
-                            />
-                        </Cell>
-                        <Cell xs={6}>
-                            <Field
-                                component={TextFieldAdapter}
-                                name="salary"
-                                required
-                                label="Salário"
-                                type="number"
-                                placeholder="Exemplo: 1500"
-                                min={0}
                             />
                         </Cell>
                         <Cell xs={6}>

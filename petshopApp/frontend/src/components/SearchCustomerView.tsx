@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useLazyQuery } from "@apollo/client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //  QUERIES:
 import { CUSTOMERS_BY_NAME_LIKE } from "../graphql/queries";
@@ -18,13 +18,10 @@ import {
   TableRow,
   TableBody,
 } from "bold-ui";
-import AuthContext from "../AuthContext";
 
 let timeout: NodeJS.Timeout;
 
 export function SearchCustomerView() {
-  const { user } = useContext(AuthContext);
-
   const [findCustomers, { data: customers }] =
     useLazyQuery<CustomersByNameLikeResult>(CUSTOMERS_BY_NAME_LIKE, {
       fetchPolicy: "network-only",
@@ -67,7 +64,6 @@ export function SearchCustomerView() {
               <TableHeader>ID</TableHeader>
               <TableHeader>Nome</TableHeader>
               <TableHeader>Data de nascimento</TableHeader>
-              {user!.isAdmin && <TableHeader>A pagar</TableHeader>}
               <TableHeader></TableHeader>
             </TableRow>
           </TableHead>

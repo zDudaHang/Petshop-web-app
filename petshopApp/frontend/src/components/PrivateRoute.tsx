@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import AuthContext from "../AuthContext";
+import { LOCAL_STORAGE_AUTH_TOKEN } from "./Login/model";
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
-  const { user } = useContext(AuthContext);
+
+  const token = window.localStorage.getItem(LOCAL_STORAGE_AUTH_TOKEN);
 
   return (
     // Show the component only when the user is logged in
@@ -11,7 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
     <Route
       {...rest}
       render={(props) =>
-        user!.isAdmin ? <Component {...props} /> : <Redirect to="/" />
+        token ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );

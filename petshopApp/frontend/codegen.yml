@@ -1,0 +1,22 @@
+overwrite: true
+schema: "../src/main/resources/graphql/models.graphqls"
+documents: 'src/**/*.gql'
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  '../src/main/kotlin/br/bridge/mariaeduarda/petshopApp/model/Types.kt':
+    plugins:
+      - kotlin
+    config:
+      listType: List
+      package: br.bridge.mariaeduarda.petshopApp.model
+      scalars:
+        Long: Long
+        LocalDate: java.time#LocalDate
+        LocalDateTime: java.time#LocalDateTime
+        LocalTime: java.time#LocalTime
+        Instant: java.time#Instant
+

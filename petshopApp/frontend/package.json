@@ -6,6 +6,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@emotion/core": "^10.0.35",
+    "@graphql-codegen/kotlin": "^2.2.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -29,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,6 +49,10 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.3.0",
+    "@graphql-codegen/typescript": "2.4.1",
+    "@graphql-codegen/typescript-operations": "^2.2.1",
+    "@graphql-codegen/typescript-react-apollo": "3.2.2",
     "@types/react-router-dom": "^5.1.6"
   }
 }

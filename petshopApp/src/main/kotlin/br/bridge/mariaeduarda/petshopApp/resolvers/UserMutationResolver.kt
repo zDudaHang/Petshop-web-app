@@ -33,6 +33,6 @@ class UserMutationResolver(
         val authentication: Authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken)
         val token: String = tokenService.generateToken(authentication)
         val userDetails : UserDetailsImpl = authentication.principal as UserDetailsImpl
-        return SigninPayload(userDetails.user,token)
+        return SigninPayload(userDetails.user, token)
     }
 }

@@ -11,25 +11,25 @@ import java.util.Date
 
 @Service
 class TokenService {
-    private val expiration: Instant = Instant.now().plus(Duration.ofHours(2))
+    private val EXPIRATION: Instant = Instant.now().plus(Duration.ofSeconds(1))
 
-    private val secret: String = "Bebel"
+    private val SECRET: String = "Bebel"
 
     fun generateToken(authentication: Authentication): String {
         val usuario: UserDetailsImpl = authentication.principal as UserDetailsImpl
         val now = Date()
-        val exp = Date(now.time + expiration.toEpochMilli())
+        val exp = Date(now.time + EXPIRATION.toEpochMilli())
 
         return Jwts.builder()
-            .setSubject(usuario.username)
+            .setSubject(usuario.user.id.toString())
             .setIssuedAt(Date())
             .setExpiration(exp)
-            .signWith(SignatureAlgorithm.HS256, secret).compact()
+            .signWith(SignatureAlgorithm.HS256, SECRET).compact()
     }
 
     fun isTokenValid(token: String?): Boolean {
         return try {
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token)
             true
         } catch (e: Exception) {
             false
@@ -37,7 +37,7 @@ class TokenService {
     }
 
     fun getTokenId(token: String?): Long? {
-        val body = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).body
+        val body = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).body
         return body.subject.toLong()
     }
 }
