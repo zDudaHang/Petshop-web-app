@@ -33,7 +33,7 @@ type Mutation {
     #    USER
     newUser(username: String!, password: String!, isAdmin: Boolean!, isVet: Boolean!, name: String!): User
 
-    login(input: LoginInput!): SigninPayload
+    login(input: LoginInput!): SigninPayload!
 
 }
 
