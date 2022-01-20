@@ -5,7 +5,6 @@ import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
-@Table
 data class Customer(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null,
