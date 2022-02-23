@@ -1,7 +1,5 @@
 package br.bridge.mariaeduarda.petshopApp.entities
 
-import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -22,10 +20,10 @@ data class User (
         var password: String,
 
         @Column
-        var isAdmin: Boolean,
+        var isAdmin: Boolean = false,
 
         @Column
-        var isVet: Boolean,
+        var isVet: Boolean = false,
 
         @Column
         var name: String

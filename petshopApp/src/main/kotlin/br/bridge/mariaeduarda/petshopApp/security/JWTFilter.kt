@@ -1,10 +1,12 @@
 package br.bridge.mariaeduarda.petshopApp.security
 
 import br.bridge.mariaeduarda.petshopApp.entities.User
+import br.bridge.mariaeduarda.petshopApp.exception.ExpiredAccessTokenException
 import br.bridge.mariaeduarda.petshopApp.impl.UserDetailsImpl
 import br.bridge.mariaeduarda.petshopApp.services.TokenService
 import br.bridge.mariaeduarda.petshopApp.services.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
@@ -18,18 +20,18 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class JWTFilter(@Autowired private val tokenService: TokenService, @Autowired private val userService: UserService) : OncePerRequestFilter() {
 
-    @Throws(IOException::class, ServletException::class)
+    @Throws(IOException::class, ServletException::class, ExpiredAccessTokenException::class)
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
         val tokenFromHeader: String? = getTokenFromHeader(request)
-        val tokenValid: Boolean = tokenService.isTokenValid(tokenFromHeader)
-        if (tokenValid) authenticate(tokenFromHeader)
+        val isTokenValid = tokenService.isTokenValid(tokenFromHeader)
+        if (isTokenValid) authenticate(tokenFromHeader)
         filterChain.doFilter(request, response)
     }
 
     private fun authenticate(tokenFromHeader: String?) {
-        val id: Long? = tokenService.getTokenId(tokenFromHeader)
-        if (id != null) {
-            val user: User = userService.findById(id)
+        val userId: Long? = tokenService.getUserIdByToken(tokenFromHeader)
+        if (userId != null) {
+            val user: User = userService.findById(userId)
             val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(UserDetailsImpl(user), null, null)
             SecurityContextHolder.getContext().authentication = usernamePasswordAuthenticationToken
             println(SecurityContextHolder.getContext().authentication.isAuthenticated)
@@ -42,5 +44,4 @@ class JWTFilter(@Autowired private val tokenService: TokenService, @Autowired pr
             null
         } else token.substring(7, token.length)
     }
-
 }

@@ -16,8 +16,11 @@ export function LoginView() {
       setShowAlert(true);
     },
     onCompleted: (data: LoginMutation) => {
-      data.login?.token &&
-        window.localStorage.setItem(LOCAL_STORAGE_AUTH_TOKEN, data.login.token);
+      data.login?.accessToken &&
+        window.localStorage.setItem(
+          LOCAL_STORAGE_AUTH_TOKEN,
+          data.login.accessToken
+        );
       history.push("/searchCustomer");
     },
   });

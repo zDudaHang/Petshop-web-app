@@ -25,8 +25,8 @@ class UserService(@Autowired val repo: UserRepository, @Autowired val passwordEn
         throw UsernameNotFoundException("User not found")
     }
 
-    fun save(username: String, password: String, isAdmin: Boolean, isVet: Boolean, name: String): User {
-        val u = User(username = username, password = passwordEncoder.encode(password), isAdmin = isAdmin, isVet = isVet, name = name)
+    fun save(username: String, password: String, name: String): User {
+        val u = User(username = username, password = passwordEncoder.encode(password), name = name)
         repo.save(u)
         return u
     }

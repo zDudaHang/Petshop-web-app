@@ -1,0 +1,23 @@
+type Customer {
+    id: Int!
+    name: String!
+    birthDate: String!
+    pets: [Pet]
+    debt: Float!
+}
+
+extend type Query {
+    customers: [Customer]
+    customer(id: Int!): Customer
+    customersByNameLike(name: String!): [Customer]
+    customerPets(id: Int!): [Pet]
+
+}
+
+extend type Mutation {
+    newCustomer(name: String!, birthDate: String!): Customer!
+    updateCustomer(id: Int!, newName: String!): Customer
+    deleteCustomer(id: Int!): Boolean
+    addDebt(id: Int!, value: String!): Customer
+    removeDebt(id: Int!, value: Float!): Customer
+}

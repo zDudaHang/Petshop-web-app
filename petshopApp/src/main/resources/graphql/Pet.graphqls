@@ -1,0 +1,19 @@
+type Pet {
+    id: Int!
+    name: String!
+    birthDate: String!
+    owner: Customer!
+    species: Species!
+}
+
+extend type Query {
+    pets: [Pet]
+    pet(id: Int!): Pet
+    petsByNameLike(name: String!): [Pet]
+}
+
+extend type Mutation {
+    newPet(name: String!, birthDate: String!, ownerId: Int!, speciesId: Int!): Pet
+    updatePet(id: Int!, newName: String!): Pet!
+    deletePet(id: Int!) : Boolean
+}

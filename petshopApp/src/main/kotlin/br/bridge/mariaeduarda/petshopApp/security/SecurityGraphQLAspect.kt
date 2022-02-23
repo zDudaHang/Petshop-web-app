@@ -1,5 +1,6 @@
 package br.bridge.mariaeduarda.petshopApp.security
 
+import br.bridge.mariaeduarda.petshopApp.exception.HttpForbiddenException
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
@@ -22,7 +23,7 @@ class SecurityGraphQLAspect {
             !SecurityContextHolder.getContext().authentication.isAuthenticated ||
             AnonymousAuthenticationToken::class.java.isAssignableFrom(SecurityContextHolder.getContext().authentication.javaClass)
         ) {
-            throw Exception("Acesso não permitido")
+            throw HttpForbiddenException("Acesso não permitido")
         }
     }
 

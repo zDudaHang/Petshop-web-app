@@ -13,25 +13,17 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  Instant: any;
-  LocalDate: any;
-  LocalDateTime: any;
-  LocalTime: any;
-  Long: any;
 };
 
-export type Appointment = {
-  __typename?: 'Appointment';
-  date: Scalars['String'];
-  id: Scalars['Int'];
-  pet: Pet;
-  time: Scalars['String'];
-  user: User;
-};
+export enum AuthenticationError {
+  ExpiredAccessToken = 'EXPIRED_ACCESS_TOKEN',
+  ExpiredRefreshToken = 'EXPIRED_REFRESH_TOKEN'
+}
 
-export type AppointmentQueryInput = {
-  time?: InputMaybe<Scalars['LocalDateTime']>;
-  userId?: InputMaybe<Scalars['Long']>;
+export type CreateUserInput = {
+  name: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
 };
 
 export type Customer = {
@@ -53,11 +45,11 @@ export type Mutation = {
   addDebt?: Maybe<Customer>;
   deleteCustomer?: Maybe<Scalars['Boolean']>;
   deletePet?: Maybe<Scalars['Boolean']>;
-  login?: Maybe<SigninPayload>;
-  newAppointment?: Maybe<Appointment>;
+  login: SigninPayload;
   newCustomer: Customer;
   newPet?: Maybe<Pet>;
   newUser?: Maybe<User>;
+  refreshToken: SigninPayload;
   removeDebt?: Maybe<Customer>;
   updateCustomer?: Maybe<Customer>;
   updatePet: Pet;
@@ -85,14 +77,6 @@ export type MutationLoginArgs = {
 };
 
 
-export type MutationNewAppointmentArgs = {
-  date: Scalars['String'];
-  petId: Scalars['Int'];
-  time: Scalars['String'];
-  userId: Scalars['Int'];
-};
-
-
 export type MutationNewCustomerArgs = {
   birthDate: Scalars['String'];
   name: Scalars['String'];
@@ -108,11 +92,12 @@ export type MutationNewPetArgs = {
 
 
 export type MutationNewUserArgs = {
-  isAdmin: Scalars['Boolean'];
-  isVet: Scalars['Boolean'];
-  name: Scalars['String'];
-  password: Scalars['String'];
-  username: Scalars['String'];
+  input: CreateUserInput;
+};
+
+
+export type MutationRefreshTokenArgs = {
+  input: RefreshTokenInput;
 };
 
 
@@ -145,23 +130,15 @@ export type Pet = {
 export type Query = {
   __typename?: 'Query';
   allSpecies?: Maybe<Array<Maybe<Species>>>;
-  appointment?: Maybe<Appointment>;
-  appointments?: Maybe<Array<Maybe<Appointment>>>;
   customer?: Maybe<Customer>;
   customerPets?: Maybe<Array<Maybe<Pet>>>;
   customers?: Maybe<Array<Maybe<Customer>>>;
   customersByNameLike?: Maybe<Array<Maybe<Customer>>>;
-  dayAppointments?: Maybe<Array<Maybe<Appointment>>>;
   pet?: Maybe<Pet>;
   pets?: Maybe<Array<Maybe<Pet>>>;
   petsByNameLike?: Maybe<Array<Maybe<Pet>>>;
   user?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
-};
-
-
-export type QueryAppointmentArgs = {
-  id: Scalars['Int'];
 };
 
 
@@ -180,12 +157,6 @@ export type QueryCustomersByNameLikeArgs = {
 };
 
 
-export type QueryDayAppointmentsArgs = {
-  date: Scalars['String'];
-  userId: Scalars['Int'];
-};
-
-
 export type QueryPetArgs = {
   id: Scalars['Int'];
 };
@@ -200,9 +171,14 @@ export type QueryUserArgs = {
   id: Scalars['Int'];
 };
 
+export type RefreshTokenInput = {
+  refreshToken: Scalars['String'];
+};
+
 export type SigninPayload = {
   __typename?: 'SigninPayload';
-  token?: Maybe<Scalars['String']>;
+  accessToken?: Maybe<Scalars['String']>;
+  refreshToken?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
 };
 
@@ -215,8 +191,6 @@ export type Species = {
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
-  isAdmin: Scalars['Boolean'];
-  isVet: Scalars['Boolean'];
   name: Scalars['String'];
   password: Scalars['String'];
   username: Scalars['String'];
@@ -227,13 +201,28 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'SigninPayload', token?: string | null | undefined, user?: { __typename?: 'User', id: number, username: string } | null | undefined } | null | undefined };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'SigninPayload', accessToken?: string | null | undefined, refreshToken?: string | null | undefined, user?: { __typename?: 'User', id: number, username: string } | null | undefined } };
+
+export type RefreshTokenMutationVariables = Exact<{
+  input: RefreshTokenInput;
+}>;
+
+
+export type RefreshTokenMutation = { __typename?: 'Mutation', refreshToken: { __typename?: 'SigninPayload', accessToken?: string | null | undefined, refreshToken?: string | null | undefined } };
+
+export type CreateUserMutationVariables = Exact<{
+  input: CreateUserInput;
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', newUser?: { __typename?: 'User', id: number, username: string } | null | undefined };
 
 
 export const LoginDocument = gql`
     mutation login($input: LoginInput!) {
   login(input: $input) {
-    token
+    accessToken
+    refreshToken
     user {
       id
       username
@@ -267,3 +256,71 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const RefreshTokenDocument = gql`
+    mutation refreshToken($input: RefreshTokenInput!) {
+  refreshToken(input: $input) {
+    accessToken
+    refreshToken
+  }
+}
+    `;
+export type RefreshTokenMutationFn = Apollo.MutationFunction<RefreshTokenMutation, RefreshTokenMutationVariables>;
+
+/**
+ * __useRefreshTokenMutation__
+ *
+ * To run a mutation, you first call `useRefreshTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRefreshTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [refreshTokenMutation, { data, loading, error }] = useRefreshTokenMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useRefreshTokenMutation(baseOptions?: Apollo.MutationHookOptions<RefreshTokenMutation, RefreshTokenMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RefreshTokenMutation, RefreshTokenMutationVariables>(RefreshTokenDocument, options);
+      }
+export type RefreshTokenMutationHookResult = ReturnType<typeof useRefreshTokenMutation>;
+export type RefreshTokenMutationResult = Apollo.MutationResult<RefreshTokenMutation>;
+export type RefreshTokenMutationOptions = Apollo.BaseMutationOptions<RefreshTokenMutation, RefreshTokenMutationVariables>;
+export const CreateUserDocument = gql`
+    mutation createUser($input: CreateUserInput!) {
+  newUser(input: $input) {
+    id
+    username
+  }
+}
+    `;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;

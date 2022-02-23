@@ -21,7 +21,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class WebSecurityConfiguration(
     @Autowired private val service: UserService,
     @Autowired private val jwtFilter: JWTFilter,
-    @Autowired private val encoder: PasswordEncoder) : WebSecurityConfigurerAdapter()  {
+    @Autowired private val encoder: PasswordEncoder,
+    @Autowired private val errorHandlingFilter: ErrorHandlingFilter
+    ) : WebSecurityConfigurerAdapter()  {
 
     //Configurations for authentication
     @Throws(Exception::class)
@@ -41,6 +43,7 @@ class WebSecurityConfiguration(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(errorHandlingFilter, JWTFilter::class.java)
     }
 
     @Bean

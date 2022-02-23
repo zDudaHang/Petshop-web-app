@@ -1,0 +1,10 @@
+type Species {
+    id: Int!,
+    name: String!
+}
+
+extend type Query {
+    allSpecies: [Species]
+}
+
+
