@@ -173,6 +173,7 @@ export type QueryUserArgs = {
 
 export type RefreshTokenInput = {
   refreshToken: Scalars['String'];
+  userId: Scalars['Int'];
 };
 
 export type SigninPayload = {

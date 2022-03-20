@@ -5,6 +5,7 @@ input LoginInput {
 
 input RefreshTokenInput {
     refreshToken: String!
+    userId: Int!
 }
 
 type SigninPayload {

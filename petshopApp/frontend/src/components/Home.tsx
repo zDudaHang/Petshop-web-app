@@ -1,15 +1,16 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from "react"
+import { Router, Switch, Route } from "react-router-dom"
 
-import { CreateUserView } from "./User/CreateUserView";
-import { LoginView } from "./Login/LoginView";
-import PrivateRoute from "./PrivateRoute";
-import { SearchCustomerView } from "./SearchCustomerView";
+import { CreateUserView } from "./User/CreateUserView"
+import { LoginView } from "./Login/LoginView"
+import { SearchCustomerView } from "./SearchCustomerView"
+import browserHistory from "../config/history"
+import { PrivateRoute } from "./PrivateRoute"
 
 export function Home() {
   return (
     <>
-      <Router>
+      <Router history={browserHistory}>
         <Switch>
           <Route exact path="/" component={LoginView} />
           <Route exact path="/createUser" component={CreateUserView} />
@@ -17,5 +18,5 @@ export function Home() {
         </Switch>
       </Router>
     </>
-  );
+  )
 }

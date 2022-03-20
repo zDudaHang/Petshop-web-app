@@ -1,38 +1,38 @@
-import React from "react";
-import { useMutation } from "@apollo/client";
-import { DELETE_CUSTOMER } from "../../graphql/mutations";
-import { useHistory } from "react-router-dom";
-import { Customer } from "../../types/Customer";
-import { formatDate } from "../../util/util";
+import React from "react"
+import { useMutation } from "@apollo/client"
+import { DELETE_CUSTOMER } from "../../graphql/mutations"
+import { useHistory } from "react-router-dom"
+import { Customer } from "../../types/Customer"
+import { formatDate } from "../../util/date"
 
-import { Button, Tooltip, Icon, TableRow, TableCell, Currency } from "bold-ui";
-import { MdAttachMoney } from "react-icons/md";
-import { css } from "@emotion/core";
+import { Button, Tooltip, Icon, TableRow, TableCell, Currency } from "bold-ui"
+import { MdAttachMoney } from "react-icons/md"
+import { css } from "@emotion/core"
 
 export interface TableCustomerViewProps {
-  customer: Customer;
+  customer: Customer
 }
 
 export function TableCustomerView(props: TableCustomerViewProps) {
-  const [deleteCustomer] = useMutation(DELETE_CUSTOMER);
+  const [deleteCustomer] = useMutation(DELETE_CUSTOMER)
 
-  const history = useHistory();
+  const history = useHistory()
 
   const routeUpdate = () => {
-    history.push(`/updateCustomer/${props.customer.id}`);
-  };
+    history.push(`/updateCustomer/${props.customer.id}`)
+  }
 
   const routeNewPet = () => {
-    history.push(`/createPet/${props.customer.id}`);
-  };
+    history.push(`/createPet/${props.customer.id}`)
+  }
 
   const routePets = () => {
-    history.push(`/pets/${props.customer.id}`);
-  };
+    history.push(`/pets/${props.customer.id}`)
+  }
 
   const routeAddDebt = () => {
-    history.push(`/addDebt/${props.customer.id}`);
-  };
+    history.push(`/addDebt/${props.customer.id}`)
+  }
 
   return (
     <TableRow key={props.customer.id}>
@@ -101,5 +101,5 @@ export function TableCustomerView(props: TableCustomerViewProps) {
         </Tooltip>
       </TableCell>
     </TableRow>
-  );
+  )
 }

@@ -1,34 +1,37 @@
-import { Alert, Button, VFlow } from "bold-ui";
-import React, { useState } from "react";
-import { Field, Form, FormRenderProps } from "react-final-form";
-import { useHistory } from "react-router";
-import { LoginMutation, useLoginMutation } from "../../generated/graphql";
-import { TextFieldAdapter } from "../Adapters";
-import { LOCAL_STORAGE_AUTH_TOKEN, LoginFormModel } from "./model";
+import { Alert, Button, VFlow } from "bold-ui"
+import React, { useState } from "react"
+import { Field, Form, FormRenderProps } from "react-final-form"
+import { useHistory } from "react-router"
+import { LoginMutation, useLoginMutation } from "../../generated/graphql"
+import { insertUserInLocalStorage } from "../../util/local-storage"
+import { TextFieldAdapter } from "../Adapters"
+import { LoginFormModel } from "./model"
 
 export function LoginView() {
-  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [showAlert, setShowAlert] = useState<boolean>(false)
 
-  const history = useHistory();
+  const history = useHistory()
 
   const [login] = useLoginMutation({
     onError: () => {
-      setShowAlert(true);
+      setShowAlert(true)
     },
     onCompleted: (data: LoginMutation) => {
-      data.login?.accessToken &&
-        window.localStorage.setItem(
-          LOCAL_STORAGE_AUTH_TOKEN,
-          data.login.accessToken
-        );
-      history.push("/searchCustomer");
+      if (data.login) {
+        insertUserInLocalStorage({
+          refreshToken: data.login.refreshToken,
+          accessToken: data.login.accessToken,
+          id: data.login.user?.id,
+        })
+        history.push("/searchCustomer")
+      }
     },
-  });
+  })
 
   const handleSubmit = (values: LoginFormModel) =>
     login({
       variables: { input: { ...values } },
-    });
+    })
 
   const renderForm = ({ handleSubmit }: FormRenderProps<LoginFormModel>) => {
     return (
@@ -51,8 +54,8 @@ export function LoginView() {
           </Button>
         </VFlow>
       </form>
-    );
-  };
+    )
+  }
 
   return (
     <VFlow style={{ margin: "1rem" }}>
@@ -63,5 +66,5 @@ export function LoginView() {
       )}
       <Form<LoginFormModel> onSubmit={handleSubmit} render={renderForm} />
     </VFlow>
-  );
+  )
 }

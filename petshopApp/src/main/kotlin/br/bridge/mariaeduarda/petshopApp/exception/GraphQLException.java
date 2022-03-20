@@ -1,7 +1,5 @@
 package br.bridge.mariaeduarda.petshopApp.exception;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import graphql.ErrorClassification;
@@ -23,7 +21,7 @@ public class GraphQLException extends RuntimeException implements GraphQLError {
 
 	@Override
 	public List<SourceLocation> getLocations() {
-		return new ArrayList<SourceLocation>();
+		return null;
 	}
 
 	@Override

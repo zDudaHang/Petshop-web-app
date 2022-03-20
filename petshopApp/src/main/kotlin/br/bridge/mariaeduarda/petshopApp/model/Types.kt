@@ -179,10 +179,12 @@ data class QueryUserArgs(
 }
 
 data class RefreshTokenInput(
-    val refreshToken: String
+    val refreshToken: String,
+    val userId: Int
 ) {
   constructor(args: Map<String, Any>) : this(
-      args["refreshToken"] as String
+      args["refreshToken"] as String,
+      args["userId"] as Int
   )
 }
 

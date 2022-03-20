@@ -6,7 +6,6 @@ import br.bridge.mariaeduarda.petshopApp.impl.UserDetailsImpl
 import br.bridge.mariaeduarda.petshopApp.services.TokenService
 import br.bridge.mariaeduarda.petshopApp.services.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
@@ -22,9 +21,8 @@ class JWTFilter(@Autowired private val tokenService: TokenService, @Autowired pr
 
     @Throws(IOException::class, ServletException::class, ExpiredAccessTokenException::class)
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        val tokenFromHeader: String? = getTokenFromHeader(request)
-        val isTokenValid = tokenService.isTokenValid(tokenFromHeader)
-        if (isTokenValid) authenticate(tokenFromHeader)
+        val accessToken: String? = getTokenFromHeader(request)
+        if (tokenService.isAccessTokenValid(accessToken)) authenticate(accessToken)
         filterChain.doFilter(request, response)
     }
 
@@ -34,14 +32,13 @@ class JWTFilter(@Autowired private val tokenService: TokenService, @Autowired pr
             val user: User = userService.findById(userId)
             val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(UserDetailsImpl(user), null, null)
             SecurityContextHolder.getContext().authentication = usernamePasswordAuthenticationToken
-            println(SecurityContextHolder.getContext().authentication.isAuthenticated)
         }
     }
 
     private fun getTokenFromHeader(request: HttpServletRequest): String? {
-        val token = request.getHeader("Authorization")
-        return if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+        val accessToken = request.getHeader("Authorization")
+        return if (accessToken == null || accessToken.isEmpty() || !accessToken.startsWith("Bearer ")) {
             null
-        } else token.substring(7, token.length)
+        } else accessToken.substring(7, accessToken.length)
     }
 }

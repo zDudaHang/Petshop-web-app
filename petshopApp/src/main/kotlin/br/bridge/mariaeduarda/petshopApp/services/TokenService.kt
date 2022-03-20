@@ -1,19 +1,19 @@
 package br.bridge.mariaeduarda.petshopApp.services
 
+
 import br.bridge.mariaeduarda.petshopApp.exception.ExpiredAccessTokenException
+import br.bridge.mariaeduarda.petshopApp.exception.ExpiredRefreshTokenExpcetion
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Service
-import java.io.IOException
 import java.util.Date
-import javax.servlet.ServletException
 
 @Service
 class TokenService {
     private val ACCESS_TOKEN_EXPIRATION_MS = 1000
 
-    private val REFRESH_TOKEN_EXPIRATION_MS = ACCESS_TOKEN_EXPIRATION_MS * 5
+    private val REFRESH_TOKEN_EXPIRATION_MS = ACCESS_TOKEN_EXPIRATION_MS * 10
 
     private val SECRET: String = "Bebel"
 
@@ -33,14 +33,23 @@ class TokenService {
     fun generateRefreshToken(userId: Long?): String = generateToken(userId, REFRESH_TOKEN_EXPIRATION_MS)
 
     @Throws(ExpiredAccessTokenException::class)
-    fun isTokenValid(token: String?): Boolean {
+    fun isAccessTokenValid(accessToken: String?): Boolean {
         return try {
-            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token)
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(accessToken)
             true
         } catch (e: ExpiredJwtException) {
             throw ExpiredAccessTokenException()
         } catch (e: Exception) {
             false
+        }
+    }
+
+    @Throws(ExpiredRefreshTokenExpcetion::class)
+    fun validateRefreshToken(refreshToken: String?) {
+        try {
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(refreshToken)
+        } catch (e: ExpiredJwtException) {
+            throw ExpiredRefreshTokenExpcetion()
         }
     }
 

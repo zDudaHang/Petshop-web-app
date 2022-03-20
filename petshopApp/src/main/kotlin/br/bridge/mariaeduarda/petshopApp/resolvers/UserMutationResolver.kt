@@ -1,7 +1,6 @@
 package br.bridge.mariaeduarda.petshopApp.resolvers
 
 import br.bridge.mariaeduarda.petshopApp.entities.User
-import br.bridge.mariaeduarda.petshopApp.exception.ExpiredAccessTokenException
 import br.bridge.mariaeduarda.petshopApp.impl.UserDetailsImpl
 import br.bridge.mariaeduarda.petshopApp.model.CreateUserInput
 import br.bridge.mariaeduarda.petshopApp.model.LoginInput
@@ -33,7 +32,6 @@ class UserMutationResolver(
         val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(input.username, input.password)
         val userDetails: UserDetailsImpl = authenticationManager.authenticate(usernamePasswordAuthenticationToken).principal as UserDetailsImpl
         val userId = userDetails.user.id
-        // throw ExpiredAccessTokenException()
         return SigninPayload(
             userDetails.user,
             tokenService.generateAccessToken(userId),
@@ -43,6 +41,11 @@ class UserMutationResolver(
 
     @GraphQLPublic
     fun refreshToken(input: RefreshTokenInput): SigninPayload {
-        return SigninPayload()
+        tokenService.validateRefreshToken(input.refreshToken)
+        val userId = input.userId.toLong()
+        return SigninPayload(
+            accessToken = tokenService.generateAccessToken(userId),
+            refreshToken = tokenService.generateRefreshToken(userId)
+        )
     }
 }
